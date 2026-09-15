@@ -1,0 +1,34 @@
+generated: '2026-09-14'
+method: searched
+source: npm registry search API, PyPI JSON API, GitHub search API
+package_count: 0
+official_package_count: 0
+note: >-
+  Aira Technologies publishes no client libraries. npm, PyPI and GitHub were searched on
+  2026-09-14 for the company name and for its product names (Naavik, RANGPT) and no first-party
+  package exists under any of them. There is no SDK to date-check, so there is no abandonment
+  signal to read here either — this is the absence of a program, not a decayed one. The content
+  API this repo documents is plain HTTP + JSON and needs no client library. No `SDKs` pointer is
+  emitted in apis.yml.
+packages: []
+registries_checked:
+- {registry: npm, query: aira-technologies, results: 0, url: 'https://registry.npmjs.org/-/v1/search?text=aira-technologies', http_status: 200, note: 'Nothing first-party. The nearest name matches, aira-sdk and @airachat/airacode, belong to airaproof.com and airacode.ir respectively — different companies.'}
+- {registry: npm, query: naavik, results: 0, url: 'https://registry.npmjs.org/-/v1/search?text=naavik', http_status: 200, note: 'No package of this name. The GitHub project intuit/naavik is Intuit''s service-mesh tool and is unrelated to Aira''s Naavik platform — a name collision, not a lead.'}
+- {registry: pypi, query: naavik, results: 0, url: https://pypi.org/pypi/naavik/json, http_status: 404}
+- {registry: pypi, query: aira-technologies, results: 0, url: https://pypi.org/pypi/aira-technologies/json, http_status: 404}
+- {registry: pypi, query: rangpt, results: 0, url: https://pypi.org/pypi/rangpt/json, http_status: 404}
+- {registry: pypi, query: airatech, results: 0, url: https://pypi.org/pypi/airatech/json, http_status: 404}
+unverified_leads:
+- kind: github-organization
+  url: https://github.com/aira-technologies
+  http_status: 200
+  created: '2026-08-26'
+  public_repos: 0
+  official: unverified
+  note: >-
+    A GitHub Organization with this exact slug exists but has zero public repositories, no display
+    name, no linked website, no description, no email and no location. Ownership by the company is
+    unproven and it was created only weeks before this pass. No `GitHubOrganization` pointer is
+    emitted in apis.yml — an empty, unattributable org is not evidence of a public code presence,
+    and attributing it to Aira on slug alone is exactly the mistake this pipeline's ownership
+    check exists to prevent.

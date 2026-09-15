@@ -1,0 +1,145 @@
+generated: '2026-09-14'
+method: derived
+source: openapi/ (schemas derived from live HTTP OPTIONS documents) + /wp/v2/types + /wp/v2/taxonomies
+description: >-
+  Entity-relationship graph for the WordPress REST content API behind aira-technology.com, derived
+  from the schemas the server publishes in its own OPTIONS documents and from the registered
+  content types and taxonomies. Ids are plain integers — this surface uses no prefixed or typed
+  identifiers, so an id is only meaningful together with the collection it came from.
+id_scheme:
+  type: integer
+  prefixed: false
+  note: >-
+    `id` is a WordPress post/term/user id. The same integer can exist in posts, pages, media and
+    categories and mean different things, so an agent must carry the collection alongside the id.
+    Records also expose a `slug` (unique within a type) and a `link` (the canonical public URL),
+    either of which is a safer human-facing handle than the integer.
+entities:
+- name: Post
+  collection: /wp/v2/posts
+  count_at_capture: 50
+  description: News, press releases and blog posts.
+  key_fields: [id, date, date_gmt, modified, slug, status, link, title, content, excerpt, author, featured_media, categories, tags, class_list]
+  relationships:
+  - belongs_to: User
+    via: author
+    cardinality: has_one
+  - has_many: Category
+    via: categories
+  - has_many: Tag
+    via: tags
+    note: Registered, but the post_tag taxonomy holds 0 terms on this site.
+  - has_one: Attachment
+    via: featured_media
+- name: Page
+  collection: /wp/v2/pages
+  count_at_capture: 19
+  description: Static marketing and policy pages.
+  key_fields: [id, date, modified, slug, status, link, title, content, excerpt, author, featured_media, parent, menu_order, template]
+  relationships:
+  - belongs_to: User
+    via: author
+    cardinality: has_one
+  - belongs_to: Page
+    via: parent
+    cardinality: has_one
+    note: Pages are hierarchical; `parent` is 0 at the root.
+  - has_one: Attachment
+    via: featured_media
+- name: Article
+  collection: /wp/v2/article
+  count_at_capture: 3
+  description: >-
+    Site-specific custom post type carrying long-form technical articles and whitepapers, served
+    under /article/<slug>/. Distinct from Post.
+  key_fields: [id, date, modified, slug, status, link, title, content, excerpt, author, featured_media, categories]
+  relationships:
+  - belongs_to: User
+    via: author
+    cardinality: has_one
+  - has_many: Category
+    via: categories
+  - has_one: Attachment
+    via: featured_media
+- name: Event
+  collection: /wp/v2/events
+  count_at_capture: 4
+  description: >-
+    Site-specific custom post type carrying Aira Activate conferences and industry sessions,
+    served under /events/<slug>/. Registers no taxonomy.
+  key_fields: [id, date, modified, slug, status, link, title, content, excerpt, author, featured_media]
+  relationships:
+  - belongs_to: User
+    via: author
+    cardinality: has_one
+  - has_one: Attachment
+    via: featured_media
+- name: Attachment
+  collection: /wp/v2/media
+  count_at_capture: 311
+  description: Media library entries — imagery, logos, event photography and documents — with generated size variants.
+  key_fields: [id, date, slug, link, title, author, media_type, mime_type, source_url, alt_text, caption, media_details, post]
+  relationships:
+  - belongs_to: User
+    via: author
+    cardinality: has_one
+  - belongs_to: Post
+    via: post
+    cardinality: has_one
+    note: The post, page, article or event the attachment is attached to; 0 when unattached.
+- name: Category
+  collection: /wp/v2/categories
+  count_at_capture: 5
+  description: 'Taxonomy terms applied to Post and Article. At capture: Blog (15), Press Release (35), Wireless (2), Whitepaper (0), Uncategorized (1).'
+  key_fields: [id, count, name, slug, description, parent, link, taxonomy]
+  relationships:
+  - belongs_to: Category
+    via: parent
+    cardinality: has_one
+    note: Categories are hierarchical; `parent` is 0 at the root.
+  - has_many: Post
+    via: 'reverse of Post.categories (query /wp/v2/posts?categories=<id>)'
+  - has_many: Article
+    via: 'reverse of Article.categories (query /wp/v2/article?categories=<id>)'
+- name: Tag
+  collection: /wp/v2/tags
+  count_at_capture: 0
+  description: post_tag taxonomy. Registered and queryable, but empty on this site.
+  key_fields: [id, count, name, slug, description, link, taxonomy]
+  relationships:
+  - has_many: Post
+    via: 'reverse of Post.tags'
+- name: User
+  collection: /wp/v2/users
+  count_at_capture: 4
+  description: >-
+    Public author records used as bylines. The anonymous `view` context exposes id, name, url,
+    description, link, slug and avatar_urls only — no email address and no role. Two of the four
+    accounts are agency accounts whose display name is itself an email address; those values are
+    deliberately not reproduced in this repository.
+  key_fields: [id, name, url, description, link, slug, avatar_urls]
+  relationships:
+  - has_many: Post
+    via: 'reverse of Post.author (query /wp/v2/posts?author=<id>)'
+  - has_many: Article
+    via: 'reverse of Article.author'
+- name: SearchResult
+  collection: /wp/v2/search
+  description: >-
+    Lightweight projection across Post, Page, Article and Event — id, title, url, type, subtype
+    and _links only. Not a stored entity; resolve `url` or re-fetch by id from the collection
+    named in `subtype`.
+  key_fields: [id, title, url, type, subtype]
+  relationships:
+  - resolves_to: [Post, Page, Article, Event]
+    via: 'subtype + id'
+relationship_count: 17
+notes:
+- >-
+  Every relationship above is expressed twice by the server: as an id field on the record, and as
+  a link relation under `_links` (author, wp:attachment, wp:term, wp:featuredmedia, up, self,
+  collection). `_embed=true` inlines the linked records under `_embedded`, which removes an N+1
+  fetch pattern for agents walking this graph.
+- >-
+  This is a content graph for a corporate marketing site. It is NOT a model of Naavik, RANGPT or
+  any Aira product — those have no public data model, no public schema and no public API.

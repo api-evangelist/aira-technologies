@@ -1,0 +1,110 @@
+generated: '2026-09-14'
+method: probed
+source: live requests against https://aira-technology.com/wp-json/ on 2026-09-14
+description: >-
+  Working request/response examples captured live. Every value below was returned by the API — no
+  example is synthesized. All requests are anonymous; no credential is needed. Responses are
+  trimmed with the `_fields` parameter where the full record is large (an unfiltered post record on
+  this host runs to tens of kilobytes).
+base_url: https://aira-technology.com/wp-json
+examples:
+- name: List the most recent announcements
+  operation: listPosts
+  spec: openapi/aira-technologies-posts-api-openapi.yml
+  request: 'GET /wp/v2/posts?per_page=6&orderby=date&order=desc&_fields=id,date,slug,link,categories'
+  http_status: 200
+  response_headers: {X-WP-Total: '50', X-WP-TotalPages: '9'}
+  response:
+  - {id: 105165, date: '2026-06-26T06:00:57', slug: aira-technologies-partners-and-champions-win-again-at-2026-tm-forum-moonshot-catalyst, categories: [3]}
+  - {id: 105161, date: '2026-06-24T06:00:04', slug: aira-technologies-collaborates-with-nokia-to-supercharge-ran-automation, categories: [3]}
+  - {id: 105131, date: '2026-06-18T06:00:04', slug: aira-technologies-leads-moonshot-catalyst-project-on-conflict-management-in-intent-based-networks, categories: [3]}
+  - {id: 105129, date: '2026-06-17T10:00:33', slug: introducing-naavik-one-the-autonomous-network-driver-for-telecom, categories: [3]}
+  - {id: 105114, date: '2026-03-17T09:45:48', slug: aira-technologies-snowflake-ran-automation-partnership, categories: [3]}
+  - {id: 105037, date: '2026-02-26T09:00:56', slug: aira-world-first-live-ai-zero-touch-site-provisioning-robi-axiata-l4-autonomous-networks, categories: [3]}
+  note: 'Category 3 is `press-release`. `link` was also returned and is the canonical public URL; omitted here for width.'
+- name: Search across every public post type
+  operation: searchContent
+  spec: openapi/aira-technologies-search-api-openapi.yml
+  request: 'GET /wp/v2/search?search=naavik&per_page=12&_fields=id,title,url,type,subtype'
+  http_status: 200
+  response_headers: {X-WP-Total: '12', X-WP-TotalPages: '1'}
+  response:
+  - {id: 105129, title: 'Introducing Naavik One: The Autonomous Network Driver for Telecom', type: post, subtype: post}
+  - {id: 104123, title: Naavik, type: post, subtype: page}
+  - {id: 105161, title: Aira Technologies Collaborates With Nokia to Supercharge RAN Automation, type: post, subtype: post}
+  - {id: 105114, title: Aira Technologies Expands Partnership With Snowflake To Enable Radio Access Network (RAN) Automation, type: post, subtype: post}
+  - {id: 105037, title: 'A World-First, Aira Powers Live AI-Enabled Zero-Touch Site Provisioning for Robi Axiata, Introducing Closed-Loop L4 Autonomous Networks', type: post, subtype: post}
+  - {id: 104695, title: Aira Technologies Raises $14.5 Million Series B From AT&T Ventures, Intel Capital and In-Q-Tel (IQT) to Accelerate RAN Automation Using GenAI, type: post, subtype: post}
+  note: >-
+    `type` is always `post` (the WordPress object family); branch on `subtype`, which carries the
+    real collection — `post`, `page`, `article` or `events`. Titles come back HTML-escaped
+    (`AT&#038;T`); decode before display.
+- name: List the events custom post type
+  operation: listEvents
+  spec: openapi/aira-technologies-events-api-openapi.yml
+  request: 'GET /wp/v2/events?per_page=10&_fields=id,date,slug,link'
+  http_status: 200
+  response_headers: {X-WP-Total: '4', X-WP-TotalPages: '1'}
+  response:
+  - {id: 105054, date: '2026-02-26T17:48:14', slug: mwc-barcelona-2026, link: 'https://aira-technology.com/events/mwc-barcelona-2026/'}
+  - {id: 104653, date: '2025-08-25T15:44:35', slug: aira-activate-2025, link: 'https://aira-technology.com/events/aira-activate-2025/'}
+  - {id: 104640, date: '2024-10-10T13:17:51', slug: aira-activate-2024, link: 'https://aira-technology.com/events/aira-activate-2024/'}
+  - {id: 103788, date: '2024-01-30T20:46:23', slug: role-and-impact-of-generative-ai-ai-in-wireless, link: 'https://aira-technology.com/events/role-and-impact-of-generative-ai-ai-in-wireless/'}
+  note: '`date` is the publish date of the event page, not the date the event runs. There is no start/end date field.'
+- name: List the content categories
+  operation: listCategories
+  spec: openapi/aira-technologies-categories-api-openapi.yml
+  request: 'GET /wp/v2/categories?per_page=100'
+  http_status: 200
+  response_headers: {X-WP-Total: '5', X-WP-TotalPages: '1'}
+  response:
+  - {id: 3, name: Press Release, slug: press-release, count: 35}
+  - {id: 4, name: Blog, slug: blog, count: 15}
+  - {id: 6, name: Wireless, slug: wireless, count: 2}
+  - {id: 1, name: Uncategorized, slug: uncategorized, count: 1}
+  - {id: 5, name: Whitepaper, slug: whitepaper, count: 0}
+  note: 'The `whitepaper` term exists but nothing is filed under it; whitepapers live in the `article` post type.'
+- name: List the registered content types
+  operation: listTypes
+  spec: openapi/aira-technologies-discovery-api-openapi.yml
+  request: 'GET /wp/v2/types'
+  http_status: 200
+  response_excerpt:
+  - {type: post, rest_base: posts}
+  - {type: page, rest_base: pages}
+  - {type: attachment, rest_base: media}
+  - {type: events, rest_base: events}
+  - {type: article, rest_base: article}
+  note: >-
+    `article` and `events` are site-specific types — note that `article` has rest_base `article`
+    (singular), not `articles`. Guessing the plural returns 404 rest_no_route.
+- name: Get oEmbed metadata for the Naavik product page
+  operation: getOembed
+  spec: openapi/aira-technologies-oembed-api-openapi.yml
+  request: 'GET /oembed/1.0/embed?url=https%3A%2F%2Faira-technology.com%2Fnaavik%2F'
+  http_status: 200
+  response:
+    version: '1.0'
+    provider_name: Aira Technologies
+    provider_url: https://aira-technology.com
+    title: Naavik
+    type: rich
+    width: 600
+    height: 338
+  note: >-
+    `html`, `author_name` and `author_url` were also returned. `author_name` on this host is an
+    agency account whose display name is an email address; it is deliberately not reproduced here.
+- name: Page-size ceiling
+  operation: listPosts
+  spec: openapi/aira-technologies-posts-api-openapi.yml
+  request: 'GET /wp/v2/posts?per_page=500'
+  http_status: 400
+  response: '{"code":"rest_invalid_param","message":"Invalid parameter(s): per_page","data":{"status":400,"params":{"per_page":"per_page must be between 1 (inclusive) and 100 (inclusive)"}}}'
+  note: The only hard documented bound on this surface. It is a page-size limit, not a rate limit.
+- name: Anonymous write is refused
+  operation: 'n/a (not in the public spec)'
+  request: 'POST /wp/v2/posts'
+  http_status: 401
+  response: '{"code":"rest_cannot_create","message":"Sorry, you are not allowed to create posts as this user.","data":{"status":401}}'
+  note: 401, not 403 or 405. Every route on this surface is read-only for the public.
+example_count: 8

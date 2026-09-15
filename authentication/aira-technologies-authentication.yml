@@ -1,0 +1,71 @@
+generated: '2026-09-14'
+method: probed
+source: https://aira-technology.com/wp-json/
+docs: https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
+description: >-
+  Aira Technologies publishes no developer program and issues no API credentials. The WordPress
+  REST content API behind aira-technology.com is anonymously readable — no key, token, signature
+  or account is required to read posts, pages, articles, events, media, categories, authors,
+  search or the discovery metadata. The server declares exactly one authentication method in its
+  own root document, WordPress application passwords, and that method gates only the write and
+  privileged-read operations that are not part of the public surface. The Naavik and RANGPT
+  products Aira actually sells have no public authentication surface at all — there is no
+  developer portal, no signup, no key issuance and no documented token endpoint anywhere on the
+  company's site.
+summary:
+  types: []
+  anonymous_read: true
+  credentialed_write: true
+  api_key_in: []
+  oauth2_flows: []
+  note: >-
+    No securityScheme appears in any of the ten derived OpenAPI documents because the public
+    surface genuinely has none. This is a recorded absence, not a gap in harvesting:
+    derive-authentication.py returned "providers with auth profiles: 0" against these specs.
+schemes: []
+declared_by_server:
+- name: application-passwords
+  type: http
+  scheme: basic
+  description: >-
+    WordPress application passwords (RFC 7617 Basic over TLS, username + generated application
+    password). Declared in the `authentication` block of the API root document. Required for every
+    write method and for privileged reads such as GET /wp/v2/settings and the WordPress Abilities
+    registry. Credentials are issued per WordPress user from the site admin — there is no public
+    registration path, so this is a staff-only credential, not a developer credential.
+  authorization_endpoint: https://aira-technology.com/wp-admin/authorize-application.php
+  source: https://aira-technology.com/wp-json/
+gated_surfaces:
+- path: /wp/v2/settings
+  status: 401
+  finding: '{"code":"rest_forbidden","message":"Sorry, you are not allowed to do that.","data":{"status":401}}'
+- path: /wp-abilities/v1/abilities
+  status: 401
+  finding: >-
+    The WordPress Abilities registry — the site's agent-callable capability index — is registered
+    but returns 401 anonymously. If Aira ever opens it, this is the closest thing on the host to a
+    machine-discoverable tool surface; today it is auth-gated and its contents are unknown.
+- path: /wp-abilities/v1/categories
+  status: 401
+- path: /demos/
+  status: 200
+  finding: >-
+    Not an API surface, but the only other wall on the site: the product Demos page renders a
+    WordPress login form ("You must be logged in to view this page") rather than content.
+evidence:
+- url: https://aira-technology.com/wp-json/
+  http_status: 200
+  finding: 'authentication: {"application-passwords": {"endpoints": {"authorization": "https://aira-technology.com/wp-admin/authorize-application.php"}}}'
+- url: https://aira-technology.com/wp-json/wp/v2/posts?per_page=2
+  http_status: 200
+  finding: 'Anonymous read succeeds; response carries `Allow: GET`, confirming read-only anonymous access.'
+- url: https://aira-technology.com/wp-json/wp/v2/article?per_page=1
+  http_status: 200
+  finding: Anonymous read of the site-specific `article` custom post type succeeds, X-WP-Total 3.
+- url: https://aira-technology.com/wp-json/wp/v2/settings
+  http_status: 401
+- url: https://aira-technology.com/wp-json/wp-abilities/v1/abilities
+  http_status: 401
+x-evidence:
+  fetched: '2026-09-14'
+  probes: 5

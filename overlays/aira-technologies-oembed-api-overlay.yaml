@@ -1,0 +1,47 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Aira Technologies oEmbed API
+  version: 1.0.0
+extends: openapi/aira-technologies-oembed-api-openapi.yml
+x-generated: '2026-09-14'
+x-method: generated
+x-note: Aira Technologies publishes no OpenAPI. The document this overlay extends was derived by API Evangelist
+  from the server's own HTTP OPTIONS schema documents on 2026-09-14. These actions record the enhancements
+  API Evangelist added on top of that derivation — provenance, consumption guidance and cross-links to the
+  artifacts in this repo — so the derived spec can be regenerated from the live host without losing them.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-profile: https://github.com/api-evangelist/aira-technologies
+    x-apievangelist-derived: HTTP OPTIONS schema documents on https://aira-technology.com/wp-json/, 2026-09-14
+    x-apievangelist-provider-published-spec: false
+    x-apievangelist-surface: Incidental WordPress REST content API behind a corporate marketing site; NOT
+      a Naavik or RANGPT product API.
+- target: $.info
+  update:
+    x-artifacts:
+      authentication: authentication/aira-technologies-authentication.yml
+      errors: errors/aira-technologies-problem-types.yml
+      conventions: conventions/aira-technologies-conventions.yml
+      lifecycle: lifecycle/aira-technologies-lifecycle.yml
+      rate_limits: rate-limits/aira-technologies-rate-limits.yml
+      examples: examples/aira-technologies-examples.yml
+      data_model: data-model/aira-technologies-data-model.yml
+      conformance: conformance/aira-technologies-conformance.yml
+- target: $.servers[0]
+  update:
+    x-anonymous-read: true
+    x-write-requires: WordPress application password; no public issuance path.
+    x-rate-limit-signal: none observed — self-throttle
+- target: $.paths.*.get
+  update:
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      token:
+        max-ttl: 3600
+      audit: none
+    x-consumption-note: Send _fields to trim the response and _embed=true to inline author, featured media
+      and terms instead of an N+1 walk.
+    x-cache-note: Cache-Control s-maxage=2592000 — an edge cache may serve this up to 30 days stale; compare
+      `modified`.

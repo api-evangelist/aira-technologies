@@ -1,0 +1,345 @@
+openapi: 3.2.0
+info:
+  title: Aira Technologies Discovery API
+  version: wp/v2
+  description: Public, unauthenticated discovery metadata for aira-technology.com — the self-describing route index
+    (206 routes across 21 namespaces at capture), the registered content types and taxonomies, and the publication
+    statuses. This is the surface that makes the rest of the API machine-readable, because Aira Technologies publishes
+    no API documentation of any kind.
+  contact:
+    name: Aira Technologies
+    url: https://aira-technology.com/contact-us/
+  x-derived-from: https://aira-technology.com/wp-json/ route index + live GET responses
+  x-derived-on: '2026-09-14'
+  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation;
+    this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter
+    and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
+servers:
+- url: https://aira-technology.com/wp-json
+  description: Aira Technologies WordPress REST API
+tags:
+- name: Discovery
+  description: 'Self-describing metadata: routes, namespaces, content types, taxonomies and statuses.'
+paths:
+  /:
+    get:
+      operationId: getApiRoot
+      summary: Get the API root document
+      description: 'Retrieve the self-describing root document for the site: site name, description, url, home,
+        the registered namespaces (21 at capture) and the full route index (206 routes at capture), plus the site''s
+        declared authentication method.'
+      tags:
+      - Discovery
+      parameters: []
+      responses:
+        '200':
+          description: 'Retrieve the self-describing root document for the site: site name, description, url, home,
+            the registered namespaces (21 at capture) and the full route index (206 routes at capture), plus the
+            site''s declared authentication method.'
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Keyed map of records.
+        '400':
+          description: Invalid parameter — `rest_invalid_param`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required for this context or method — `rest_forbidden`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: No such record or no such route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /wp/v2:
+    get:
+      operationId: getNamespaceIndex
+      summary: Get the wp/v2 namespace index
+      description: Retrieve the route index scoped to the WordPress core `wp/v2` namespace.
+      tags:
+      - Discovery
+      parameters: []
+      responses:
+        '200':
+          description: Retrieve the route index scoped to the WordPress core `wp/v2` namespace.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Keyed map of records.
+        '400':
+          description: Invalid parameter — `rest_invalid_param`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required for this context or method — `rest_forbidden`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: No such record or no such route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /wp/v2/types:
+    get:
+      operationId: listTypes
+      summary: List content types
+      description: Retrieve every registered content type on the site with its rest_base, supported taxonomies and
+        capability flags — including the site-specific `article` and `events` custom post types.
+      tags:
+      - Discovery
+      parameters: []
+      responses:
+        '200':
+          description: Retrieve every registered content type on the site with its rest_base, supported taxonomies
+            and capability flags — including the site-specific `article` and `events` custom post types.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Keyed map of records.
+        '400':
+          description: Invalid parameter — `rest_invalid_param`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required for this context or method — `rest_forbidden`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: No such record or no such route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /wp/v2/types/{type}:
+    get:
+      operationId: getType
+      summary: Get a content type
+      description: Retrieve one registered content type by slug.
+      tags:
+      - Discovery
+      parameters:
+      - name: type
+        in: path
+        required: true
+        description: Content type slug, e.g. `post`, `page`, `article`, `events`.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve one registered content type by slug.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Keyed map of records.
+        '400':
+          description: Invalid parameter — `rest_invalid_param`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required for this context or method — `rest_forbidden`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: No such record or no such route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /wp/v2/taxonomies:
+    get:
+      operationId: listTaxonomies
+      summary: List taxonomies
+      description: Retrieve every registered taxonomy with the content types it applies to.
+      tags:
+      - Discovery
+      parameters: []
+      responses:
+        '200':
+          description: Retrieve every registered taxonomy with the content types it applies to.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Keyed map of records.
+        '400':
+          description: Invalid parameter — `rest_invalid_param`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required for this context or method — `rest_forbidden`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: No such record or no such route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /wp/v2/taxonomies/{taxonomy}:
+    get:
+      operationId: getTaxonomy
+      summary: Get a taxonomy
+      description: Retrieve one registered taxonomy by slug.
+      tags:
+      - Discovery
+      parameters:
+      - name: taxonomy
+        in: path
+        required: true
+        description: Taxonomy slug, e.g. `category`.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve one registered taxonomy by slug.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Keyed map of records.
+        '400':
+          description: Invalid parameter — `rest_invalid_param`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required for this context or method — `rest_forbidden`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: No such record or no such route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /wp/v2/statuses:
+    get:
+      operationId: listStatuses
+      summary: List publication statuses
+      description: Retrieve the publication statuses registered on the site and whether each is public and queryable.
+      tags:
+      - Discovery
+      parameters: []
+      responses:
+        '200':
+          description: Retrieve the publication statuses registered on the site and whether each is public and queryable.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Keyed map of records.
+        '400':
+          description: Invalid parameter — `rest_invalid_param`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required for this context or method — `rest_forbidden`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: No such record or no such route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /wp/v2/statuses/{status}:
+    get:
+      operationId: getStatus
+      summary: Get a publication status
+      description: Retrieve one publication status by slug.
+      tags:
+      - Discovery
+      parameters:
+      - name: status
+        in: path
+        required: true
+        description: Status slug, e.g. `publish`.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve one publication status by slug.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Keyed map of records.
+        '400':
+          description: Invalid parameter — `rest_invalid_param`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required for this context or method — `rest_forbidden`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: No such record or no such route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      description: WordPress REST error envelope. Match on `code`, never on `message`.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+        message:
+          type: string
+          description: Human-readable message; wording is not stable.
+        data:
+          type: object
+          description: Error detail.
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+            params:
+              type: object
+              description: Per-parameter validation messages, when the error is a validation failure.
+      required:
+      - code
+      - message
+      - data

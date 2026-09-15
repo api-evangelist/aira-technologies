@@ -64,5 +64,28 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Aira Technologies is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+Aira Technologies is an AI-defined networking company founded in 2019 and headquartered in Saratoga,
+California, building machine-learning and generative-AI software for mobile network operators. Its
+platform, Naavik (and Naavik One, "the Autonomous Network Driver for Telecom"), is an Adaptive
+Intelligence Framework for the Radio Access Network, combining an Intent Manager that turns natural
+language into network actions, AppGen for no-code telecom application generation, a reasoning agent
+for anomaly detection and root-cause analysis, a telecom AI/ML hub and a knowledge graph. Earlier
+work includes RANGPT, a GenAI utility for RAN observability, analysis, control and automation, and
+an AI-based channel estimation and prediction xApp. The company is a member of the O-RAN Alliance,
+the AI-RAN Alliance and TM Forum.
+
+**Aira Technologies publishes no developer program.** There is no developer portal, no API
+documentation, no OpenAPI or other specification, no SDK, no CLI, no pricing and no signup for
+Naavik or RANGPT — the products are sold through a demo and sales motion. The only machine-readable
+interface reachable at aira-technology.com is the WordPress REST content API behind the corporate
+website, which is anonymously readable and read-only. The ten OpenAPI documents in `openapi/` were
+derived by API Evangelist from that server's own HTTP OPTIONS schema documents on 2026-09-14;
+Aira Technologies did not author them.
+
+- Website: https://aira-technology.com/
+- Naavik platform: https://aira-technology.com/naavik/
+- News and press releases: https://aira-technology.com/news/
+- Blogs and whitepapers: https://aira-technology.com/blogs-whitepapers/
+- Contact: https://aira-technology.com/contact-us/
+- LinkedIn: https://www.linkedin.com/company/aira-technologies/
+- Content API root: https://aira-technology.com/wp-json/

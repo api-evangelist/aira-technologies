@@ -1,0 +1,19 @@
+generated: '2026-09-14'
+method: generated
+source: openapi/ (operationIds verified against the derived specs)
+note: >-
+  Aira Technologies publishes no AGENTS.md, no skills, no agent guidance and no API documentation
+  of any kind — searched the site, the sitemap and the live route index on 2026-09-14. These two
+  skills are API Evangelist-authored operating instructions grounded in real operationIds from the
+  specs in openapi/, which were themselves derived from the server's own published HTTP OPTIONS
+  schemas. Both flows are read-only and anonymous. They cover the company's content surface; there
+  is no Naavik or RANGPT surface to ground a product skill in.
+skills:
+- file: aira-technologies-track-ran-announcements.md
+  name: Track Aira Technologies RAN announcements and partnerships
+  api: openapi/aira-technologies-posts-api-openapi.yml
+  operations: [searchContent, listPosts, getPost, listCategories, getUser]
+- file: aira-technologies-read-technical-library.md
+  name: Read the Aira Technologies technical article and whitepaper library
+  api: openapi/aira-technologies-articles-api-openapi.yml
+  operations: [listArticles, getArticle, listCategories, listTypes, getOembed]

@@ -1,0 +1,195 @@
+openapi: 3.2.0
+info:
+  title: Aira Technologies Search API
+  version: wp/v2
+  description: 'Public, unauthenticated cross-content search over aira-technology.com — posts, pages, articles and
+    events — returning lightweight id / title / url / type / subtype records. Verified live: a query for "naavik"
+    returned 12 matching objects.'
+  contact:
+    name: Aira Technologies
+    url: https://aira-technology.com/contact-us/
+  x-derived-from: https://aira-technology.com/wp-json/ route index + HTTP OPTIONS on /wp/v2/search
+  x-derived-on: '2026-09-14'
+  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation;
+    this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter
+    and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
+servers:
+- url: https://aira-technology.com/wp-json
+  description: Aira Technologies WordPress REST API
+tags:
+- name: Search
+  description: Cross-content search across every public post type.
+paths:
+  /wp/v2/search:
+    get:
+      operationId: searchContent
+      summary: Search site content
+      description: Search across posts, pages, articles and events and return lightweight result records.
+      tags:
+      - Search
+      parameters:
+      - name: context
+        in: query
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      - name: exclude
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Ensure result set excludes specific IDs.
+      - name: include
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Limit result set to specific IDs.
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+        description: Current page of the collection.
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 100
+        description: Maximum number of items to be returned in result set.
+      - name: search
+        in: query
+        schema:
+          type: string
+        description: Limit results to those matching a string.
+      - name: subtype
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - post
+            - page
+            - events
+            - article
+            - category
+            - post_tag
+            - any
+        description: Limit results to items of one or more object subtypes.
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - post
+          - term
+          - post-format
+          default: post
+        description: Limit results to items of an object type.
+      responses:
+        '200':
+          description: A page of search results.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SearchResult'
+          headers:
+            X-WP-Total:
+              description: Total number of records matching the query.
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available at the current per_page.
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+        '400':
+          description: Invalid parameter — `rest_invalid_param`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required for this context or method — `rest_forbidden`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: No such record or no such route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      description: WordPress REST error envelope. Match on `code`, never on `message`.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+        message:
+          type: string
+          description: Human-readable message; wording is not stable.
+        data:
+          type: object
+          description: Error detail.
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+            params:
+              type: object
+              description: Per-parameter validation messages, when the error is a validation failure.
+      required:
+      - code
+      - message
+      - data
+    SearchResult:
+      title: search-result
+      type: object
+      properties:
+        id:
+          description: Unique identifier for the object.
+          type: integer
+        title:
+          description: The title for the object.
+          type: string
+        url:
+          description: URL to the object.
+          type: string
+          format: uri
+        type:
+          description: Object type.
+          type: string
+          enum:
+          - post
+          - term
+          - post-format
+        subtype:
+          description: Object subtype.
+          type: string
+          enum:
+          - post
+          - page
+          - events
+          - article
+          - category
+          - post_tag

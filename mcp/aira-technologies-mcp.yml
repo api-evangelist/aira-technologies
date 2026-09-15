@@ -1,0 +1,67 @@
+generated: '2026-09-14'
+method: derived
+status: candidate
+source: openapi/ (24 operations across 10 derived specs)
+description: >-
+  Aira Technologies operates no MCP server. Searched the company site, the route index,
+  mcp.aira-technology.com (NXDOMAIN), npm and PyPI on 2026-09-14 and found none — no hosted
+  endpoint, no stdio package, no config snippet, no mention of MCP anywhere on aira-technology.com.
+  The tool list below is a CANDIDATE derived one-to-one from the OpenAPI operations in this repo.
+  It is what an MCP server over this surface WOULD expose, not something Aira publishes. Every
+  tool is read-only because the whole anonymous surface is read-only. No `MCPServer` pointer is
+  emitted in apis.yml — that pointer asserts the provider ships a server, and Aira does not.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: none
+  verified: searched
+  note: >-
+    mode is `none` because nobody ships a server. No endpoint URL is invented here: a guessed MCP
+    path that happened to answer 200 would read as a verified agent surface, which is the worst
+    artifact this pipeline can produce.
+server:
+  name: aira-technologies
+  transport: http
+  url: null
+  published: false
+auth:
+  required: false
+  note: Every listed tool would work anonymously over plain HTTPS against https://aira-technology.com/wp-json.
+adjacent_surface:
+  name: WordPress Abilities API
+  path: /wp-json/wp-abilities/v1/abilities
+  status: 401
+  note: >-
+    The closest thing to a real agent-callable registry on this host. WordPress's Abilities API is
+    registered (routes for listing abilities, fetching one, and running one over
+    GET/POST/PUT/PATCH/DELETE) but returns 401 rest_forbidden anonymously, so its contents are
+    unknown. It is a platform capability Aira's site inherits, not something Aira built or
+    documents. Recorded as a lead for a future pass, not as a tool surface.
+tools:
+- {name: list_posts, description: List Aira Technologies news, press releases and blog posts, source_operation: 'openapi/aira-technologies-posts-api-openapi.yml#listPosts'}
+- {name: get_post, description: Retrieve a single post by id, source_operation: 'openapi/aira-technologies-posts-api-openapi.yml#getPost'}
+- {name: list_articles, description: List long-form technical articles and whitepapers, source_operation: 'openapi/aira-technologies-articles-api-openapi.yml#listArticles'}
+- {name: get_article, description: Retrieve a single article by id, source_operation: 'openapi/aira-technologies-articles-api-openapi.yml#getArticle'}
+- {name: list_events, description: List Aira Activate conferences and industry sessions, source_operation: 'openapi/aira-technologies-events-api-openapi.yml#listEvents'}
+- {name: get_event, description: Retrieve a single event by id, source_operation: 'openapi/aira-technologies-events-api-openapi.yml#getEvent'}
+- {name: list_pages, description: List the static marketing and policy pages, source_operation: 'openapi/aira-technologies-pages-api-openapi.yml#listPages'}
+- {name: get_page, description: Retrieve a single page by id, source_operation: 'openapi/aira-technologies-pages-api-openapi.yml#getPage'}
+- {name: list_media, description: List media library attachments, source_operation: 'openapi/aira-technologies-media-api-openapi.yml#listMedia'}
+- {name: get_media_item, description: Retrieve a single media attachment by id, source_operation: 'openapi/aira-technologies-media-api-openapi.yml#getAttachment'}
+- {name: list_categories, description: List content categories, source_operation: 'openapi/aira-technologies-categories-api-openapi.yml#listCategories'}
+- {name: get_category, description: Retrieve a category by id, source_operation: 'openapi/aira-technologies-categories-api-openapi.yml#getCategory'}
+- {name: list_authors, description: List public author records, source_operation: 'openapi/aira-technologies-users-api-openapi.yml#listUsers'}
+- {name: get_author, description: Retrieve a public author record by id, source_operation: 'openapi/aira-technologies-users-api-openapi.yml#getUser'}
+- {name: search_content, description: Search across posts, pages, articles and events, source_operation: 'openapi/aira-technologies-search-api-openapi.yml#searchContent'}
+- {name: get_api_root, description: Fetch the self-describing route index and site metadata, source_operation: 'openapi/aira-technologies-discovery-api-openapi.yml#getApiRoot'}
+- {name: list_types, description: List registered content types, source_operation: 'openapi/aira-technologies-discovery-api-openapi.yml#listTypes'}
+- {name: list_taxonomies, description: List registered taxonomies, source_operation: 'openapi/aira-technologies-discovery-api-openapi.yml#listTaxonomies'}
+- {name: get_oembed, description: Get oEmbed 1.0 rich metadata for an aira-technology.com URL, source_operation: 'openapi/aira-technologies-oembed-api-openapi.yml#getOembed'}
+tool_count: 19
+searched:
+- {target: 'site-wide search for "MCP" / "Model Context Protocol"', url: 'https://aira-technology.com/wp-json/wp/v2/search?search=MCP', result: 'no product or documentation match'}
+- {target: mcp.aira-technology.com, result: NXDOMAIN}
+- {target: 'npm registry search: aira-technologies, naavik', result: 'no first-party package'}
+- {target: 'https://aira-technology.com/.well-known/ai-plugin.json', http_status: 404}

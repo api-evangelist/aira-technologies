@@ -1,0 +1,287 @@
+generated: '2026-09-14'
+method: generated
+source: openapi/aira-technologies-articles-api-openapi.yml, openapi/aira-technologies-categories-api-openapi.yml,
+  openapi/aira-technologies-discovery-api-openapi.yml, openapi/aira-technologies-events-api-openapi.yml, openapi/aira-technologies-media-api-openapi.yml,
+  openapi/aira-technologies-oembed-api-openapi.yml, openapi/aira-technologies-pages-api-openapi.yml, openapi/aira-technologies-posts-api-openapi.yml,
+  openapi/aira-technologies-search-api-openapi.yml, openapi/aira-technologies-users-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified from the OpenAPI documents in this
+  repo. Every anonymously reachable operation on this surface is a read against a public marketing content
+  API, so every contract classifies the same way — action-class connected, consequence read, no human in the
+  loop, no audit requirement. There is no write, no money movement, no personal data and no irreversible action
+  to govern here. A governance starting point for exposing this API to AI agents; review and bind audience
+  per deployment.
+summary:
+  operations: 24
+  by_action_class:
+    connected: 24
+  by_consequence:
+    read: 24
+  human_in_the_loop_required: 0
+  note: 'Uniformity here is a property of the surface, not a shortcut. The anonymous surface answers `Allow:
+    GET`; an unauthenticated POST returns 401 rest_cannot_create. The only gated routes on the host — /wp/v2/settings
+    and the whole /wp-abilities/v1 namespace — return 401 and are therefore not classified.'
+operations:
+- path: /wp/v2/article
+  method: get
+  operationId: listArticles
+  spec: openapi/aira-technologies-articles-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/article/{id}
+  method: get
+  operationId: getArticle
+  spec: openapi/aira-technologies-articles-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/categories
+  method: get
+  operationId: listCategories
+  spec: openapi/aira-technologies-categories-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/categories/{id}
+  method: get
+  operationId: getCategory
+  spec: openapi/aira-technologies-categories-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /
+  method: get
+  operationId: getApiRoot
+  spec: openapi/aira-technologies-discovery-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2
+  method: get
+  operationId: getNamespaceIndex
+  spec: openapi/aira-technologies-discovery-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/types
+  method: get
+  operationId: listTypes
+  spec: openapi/aira-technologies-discovery-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/types/{type}
+  method: get
+  operationId: getType
+  spec: openapi/aira-technologies-discovery-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/taxonomies
+  method: get
+  operationId: listTaxonomies
+  spec: openapi/aira-technologies-discovery-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/taxonomies/{taxonomy}
+  method: get
+  operationId: getTaxonomy
+  spec: openapi/aira-technologies-discovery-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/statuses
+  method: get
+  operationId: listStatuses
+  spec: openapi/aira-technologies-discovery-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/statuses/{status}
+  method: get
+  operationId: getStatus
+  spec: openapi/aira-technologies-discovery-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/events
+  method: get
+  operationId: listEvents
+  spec: openapi/aira-technologies-events-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/events/{id}
+  method: get
+  operationId: getEvent
+  spec: openapi/aira-technologies-events-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/media
+  method: get
+  operationId: listMedia
+  spec: openapi/aira-technologies-media-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/media/{id}
+  method: get
+  operationId: getAttachment
+  spec: openapi/aira-technologies-media-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /oembed/1.0/embed
+  method: get
+  operationId: getOembed
+  spec: openapi/aira-technologies-oembed-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/pages
+  method: get
+  operationId: listPages
+  spec: openapi/aira-technologies-pages-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/pages/{id}
+  method: get
+  operationId: getPage
+  spec: openapi/aira-technologies-pages-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/posts
+  method: get
+  operationId: listPosts
+  spec: openapi/aira-technologies-posts-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/posts/{id}
+  method: get
+  operationId: getPost
+  spec: openapi/aira-technologies-posts-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/search
+  method: get
+  operationId: searchContent
+  spec: openapi/aira-technologies-search-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/users
+  method: get
+  operationId: listUsers
+  spec: openapi/aira-technologies-users-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wp/v2/users/{id}
+  method: get
+  operationId: getUser
+  spec: openapi/aira-technologies-users-api-openapi.yml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

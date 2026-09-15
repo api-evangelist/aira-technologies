@@ -1,0 +1,84 @@
+generated: '2026-09-14'
+method: probed
+source: https://aira-technology.com/wp-json/ + site sitemap + live probes
+description: >-
+  Versioning, deprecation, support and status posture for the only machine-readable surface Aira
+  Technologies exposes. Everything here is a recorded absence except the version scheme, which is
+  read from the live route index. Aira publishes no API lifecycle policy of any kind, for either
+  the incidental content API documented in this repo or for the Naavik and RANGPT products it
+  sells.
+versioning:
+  scheme: uri-path namespace
+  current_version: wp/v2
+  namespaces_registered: 21
+  routes_registered: 206
+  policy_published: false
+  detail: >-
+    The version lives in the path as a namespace segment. It is WordPress core's version, not
+    Aira's — it moves when the site's WordPress installation is upgraded, with no announcement,
+    changelog or migration note. A consumer has no way to learn that the contract changed except
+    by re-reading the route index.
+  source: https://aira-technology.com/wp-json/
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  detail: >-
+    No deprecation policy, no Sunset or Deprecation response header on any observed response, and
+    no operation in the ten derived OpenAPI documents is marked deprecated. Routes can disappear
+    silently when a WordPress plugin is deactivated — the `leadconnector_api/v1`,
+    `simple-history/v1` and `wp-smush/v1` namespaces present at capture are plugin-owned and are
+    not a contract Aira has undertaken to keep.
+  no_deprecation_pointer_reason: >-
+    No `Deprecation` pointer is emitted in apis.yml. A pointer would assert that the provider
+    publishes a deprecation policy, and no such page exists on aira-technology.com.
+status_page:
+  published: false
+  url: null
+  detail: >-
+    There is no status page. status.aira-technology.com is NXDOMAIN, no third-party status host
+    (statuspage.io, status.io, instatus) is linked from the site, and no incident history is
+    published. A consumer of this surface has no operational signal.
+  no_statuspage_pointer_reason: >-
+    No `StatusPage` pointer is emitted in apis.yml, for the same reason as the deprecation
+    pointer: it would assert a surface the provider does not serve.
+sla:
+  published: false
+  detail: No SLA, uptime commitment or support-response target is published for any Aira product or for this surface.
+support:
+  api_support_channel: null
+  general_contact: https://aira-technology.com/contact-us/
+  detail: >-
+    There is no developer support channel — no forum, no community, no developer email, no issue
+    tracker. The only contact route is the corporate contact form, which is a sales and general
+    enquiry form.
+changelog:
+  api_changelog_published: false
+  company_news: https://aira-technology.com/news/
+  detail: >-
+    Aira publishes a dated company news and press-release archive (35 press releases in the
+    `press-release` category at capture) but no API or product changelog. Company news is not a
+    change log for a contract, so no `ChangeLog` pointer is emitted.
+content_freshness:
+  most_recent_post: '2026-06-26'
+  most_recent_article: '2023-09-26'
+  most_recent_event: '2026-02-26'
+  detail: >-
+    Read live from the collections on 2026-09-14. The news archive is actively maintained; the
+    `article` custom post type has not been added to since September 2023 and reads as a retired
+    content stream that is still served.
+evidence:
+- url: https://aira-technology.com/wp-json/
+  http_status: 200
+  finding: 21 namespaces, 206 routes. No version or deprecation metadata beyond the namespace segment.
+- url: https://aira-technology.com/wp-json/wp/v2/posts?per_page=2
+  http_status: 200
+  finding: No Sunset, Deprecation, Warning or Link rel="deprecation" header present.
+- url: https://status.aira-technology.com
+  http_status: null
+  finding: DNS NXDOMAIN.
+- url: https://aira-technology.com/news/
+  http_status: 200
+  finding: Dated company news archive; not an API changelog.

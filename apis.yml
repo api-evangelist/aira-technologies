@@ -1,18 +1,308 @@
 aid: aira-technologies
 name: Aira Technologies
-description: 'Aira Technologies is a company surfaced via the API Evangelist harvest backlog (source:
-  secondary-market) and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Aira Technologies is an AI-defined networking company founded in 2019 and headquartered in
+  Saratoga, California, building machine-learning and generative-AI software for mobile network
+  operators. Its platform, Naavik, is marketed as an Adaptive Intelligence Framework for the Radio
+  Access Network, combining an Intent Manager that turns natural language into network actions,
+  AppGen for no-code telecom application generation, a reasoning agent for anomaly detection and
+  root-cause analysis, a telecom-specific AI/ML hub and a knowledge graph. Earlier work includes
+  RANGPT, a GenAI utility for RAN observability, analysis, control and automation demonstrated with
+  Broadcom and Tech Mahindra, and an AI-based channel estimation and prediction xApp. The company
+  is a member of the O-RAN Alliance, the AI-RAN Alliance and TM Forum, and raised a $14.5M Series B
+  from AT&T Ventures, Intel Capital and In-Q-Tel. Aira sells to operators through a demo and
+  sales motion and publishes no developer program, no API documentation, no SDKs and no public
+  specification for Naavik or RANGPT. The only machine-readable interface reachable at
+  aira-technology.com is the WordPress REST content API behind the corporate website, captured here
+  for discovery purposes; it is anonymously readable and read-only.
 url: https://raw.githubusercontent.com/api-evangelist/aira-technologies/refs/heads/main/apis.yml
+image: https://aira-technology.com/wp-content/uploads/2023/01/cropped-Aira-Black-1.png
+position: Producing
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-09-14'
 modified: '2026-09-14'
 tags:
 - Company
-apis: []
+- Telecommunications
+- Wireless
+- Artificial Intelligence
+- Machine Learning
+- 5G
+- Radio Access Network
+- Network Automation
+- Generative AI
+- Observability
+- Content
+apis:
+- aid: aira-technologies:aira-technologies-posts-api
+  name: Aira Technologies Posts API
+  description: >-
+    Public, unauthenticated read access to the Aira Technologies news, press-release and blog
+    archive via the WordPress core REST API. Verified live at 50 published posts.
+  humanURL: https://aira-technology.com/wp-json/
+  baseURL: https://aira-technology.com/wp-json
+  tags:
+  - Posts
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/aira-technologies-posts-api-openapi.yml
+  - type: Authentication
+    url: authentication/aira-technologies-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aira-technologies-problem-types.yml
+  - type: Conventions
+    url: conventions/aira-technologies-conventions.yml
+  - type: DataModel
+    url: data-model/aira-technologies-data-model.yml
+  - type: Conformance
+    url: conformance/aira-technologies-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/aira-technologies-lifecycle.yml
+  - type: Overlay
+    url: overlays/aira-technologies-posts-api-overlay.yaml
+- aid: aira-technologies:aira-technologies-pages-api
+  name: Aira Technologies Pages API
+  description: >-
+    Public, unauthenticated read access to the static marketing and policy pages of
+    aira-technology.com — Naavik, Vision, About, Leadership, Founding Team, Advisors & Investors,
+    Partners, Videos, Blogs & Whitepapers, Contact, Careers and Privacy Policy. Verified live at
+    19 published pages.
+  humanURL: https://aira-technology.com/wp-json/
+  baseURL: https://aira-technology.com/wp-json
+  tags:
+  - Pages
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/aira-technologies-pages-api-openapi.yml
+  - type: Authentication
+    url: authentication/aira-technologies-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aira-technologies-problem-types.yml
+  - type: Conventions
+    url: conventions/aira-technologies-conventions.yml
+  - type: DataModel
+    url: data-model/aira-technologies-data-model.yml
+  - type: Conformance
+    url: conformance/aira-technologies-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/aira-technologies-lifecycle.yml
+  - type: Overlay
+    url: overlays/aira-technologies-pages-api-overlay.yaml
+- aid: aira-technologies:aira-technologies-articles-api
+  name: Aira Technologies Articles API
+  description: >-
+    Public, unauthenticated read access to the `article` custom post type behind
+    aira-technology.com — long-form technical articles and whitepapers published separately from
+    the news archive. Verified live at 3 published articles.
+  humanURL: https://aira-technology.com/wp-json/
+  baseURL: https://aira-technology.com/wp-json
+  tags:
+  - Articles
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/aira-technologies-articles-api-openapi.yml
+  - type: Authentication
+    url: authentication/aira-technologies-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aira-technologies-problem-types.yml
+  - type: Conventions
+    url: conventions/aira-technologies-conventions.yml
+  - type: DataModel
+    url: data-model/aira-technologies-data-model.yml
+  - type: Conformance
+    url: conformance/aira-technologies-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/aira-technologies-lifecycle.yml
+  - type: Overlay
+    url: overlays/aira-technologies-articles-api-overlay.yaml
+- aid: aira-technologies:aira-technologies-events-api
+  name: Aira Technologies Events API
+  description: >-
+    Public, unauthenticated read access to the `events` custom post type behind
+    aira-technology.com — the Aira Activate conferences and the Role of AI/GenAI in Wireless
+    sessions. Verified live at 4 published events.
+  humanURL: https://aira-technology.com/wp-json/
+  baseURL: https://aira-technology.com/wp-json
+  tags:
+  - Events
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/aira-technologies-events-api-openapi.yml
+  - type: Authentication
+    url: authentication/aira-technologies-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aira-technologies-problem-types.yml
+  - type: Conventions
+    url: conventions/aira-technologies-conventions.yml
+  - type: DataModel
+    url: data-model/aira-technologies-data-model.yml
+  - type: Conformance
+    url: conformance/aira-technologies-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/aira-technologies-lifecycle.yml
+  - type: Overlay
+    url: overlays/aira-technologies-events-api-overlay.yaml
+- aid: aira-technologies:aira-technologies-media-api
+  name: Aira Technologies Media API
+  description: >-
+    Public, unauthenticated read access to the media library behind aira-technology.com — platform
+    and product imagery, partner and press logos, event photography and document attachments with
+    their generated size variants. Verified live at 311 attachments.
+  humanURL: https://aira-technology.com/wp-json/
+  baseURL: https://aira-technology.com/wp-json
+  tags:
+  - Media
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/aira-technologies-media-api-openapi.yml
+  - type: Authentication
+    url: authentication/aira-technologies-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aira-technologies-problem-types.yml
+  - type: Conventions
+    url: conventions/aira-technologies-conventions.yml
+  - type: DataModel
+    url: data-model/aira-technologies-data-model.yml
+  - type: Conformance
+    url: conformance/aira-technologies-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/aira-technologies-lifecycle.yml
+  - type: Overlay
+    url: overlays/aira-technologies-media-api-overlay.yaml
+- aid: aira-technologies:aira-technologies-search-api
+  name: Aira Technologies Search API
+  description: >-
+    Public, unauthenticated cross-content search over aira-technology.com — posts, pages, articles
+    and events — returning lightweight id / title / url / type / subtype records. Verified live: a
+    query for "naavik" returned 12 matching objects.
+  humanURL: https://aira-technology.com/wp-json/
+  baseURL: https://aira-technology.com/wp-json
+  tags:
+  - Search
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/aira-technologies-search-api-openapi.yml
+  - type: Authentication
+    url: authentication/aira-technologies-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aira-technologies-problem-types.yml
+  - type: Conventions
+    url: conventions/aira-technologies-conventions.yml
+  - type: Conformance
+    url: conformance/aira-technologies-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/aira-technologies-lifecycle.yml
+  - type: Overlay
+    url: overlays/aira-technologies-search-api-overlay.yaml
+- aid: aira-technologies:aira-technologies-discovery-api
+  name: Aira Technologies Discovery API
+  description: >-
+    Public, unauthenticated discovery metadata for aira-technology.com — the self-describing route
+    index (206 routes across 21 namespaces at capture), the registered content types and
+    taxonomies, and the publication statuses. This is the surface that makes the rest of the API
+    machine-readable, because Aira Technologies publishes no API documentation of any kind.
+  humanURL: https://aira-technology.com/wp-json/
+  baseURL: https://aira-technology.com/wp-json
+  tags:
+  - Discovery
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/aira-technologies-discovery-api-openapi.yml
+  - type: Authentication
+    url: authentication/aira-technologies-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aira-technologies-problem-types.yml
+  - type: Conventions
+    url: conventions/aira-technologies-conventions.yml
+  - type: Conformance
+    url: conformance/aira-technologies-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/aira-technologies-lifecycle.yml
+  - type: Overlay
+    url: overlays/aira-technologies-discovery-api-overlay.yaml
+- aid: aira-technologies:aira-technologies-categories-api
+  name: Aira Technologies Categories API
+  description: >-
+    Public, unauthenticated read access to the content categories applied across Aira Technologies
+    posts and articles. Verified live at 5 categories.
+  humanURL: https://aira-technology.com/wp-json/
+  baseURL: https://aira-technology.com/wp-json
+  tags:
+  - Categories
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/aira-technologies-categories-api-openapi.yml
+  - type: Authentication
+    url: authentication/aira-technologies-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aira-technologies-problem-types.yml
+  - type: Conventions
+    url: conventions/aira-technologies-conventions.yml
+  - type: DataModel
+    url: data-model/aira-technologies-data-model.yml
+  - type: Conformance
+    url: conformance/aira-technologies-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/aira-technologies-lifecycle.yml
+- aid: aira-technologies:aira-technologies-users-api
+  name: Aira Technologies Users API
+  description: >-
+    Public, unauthenticated read access to the public author records behind aira-technology.com —
+    the bylines attached to posts and articles. Verified live at 4 public authors.
+  humanURL: https://aira-technology.com/wp-json/
+  baseURL: https://aira-technology.com/wp-json
+  tags:
+  - User
+  tags_raw:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/aira-technologies-users-api-openapi.yml
+  - type: Authentication
+    url: authentication/aira-technologies-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aira-technologies-problem-types.yml
+  - type: Conventions
+    url: conventions/aira-technologies-conventions.yml
+  - type: DataModel
+    url: data-model/aira-technologies-data-model.yml
+  - type: Conformance
+    url: conformance/aira-technologies-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/aira-technologies-lifecycle.yml
+- aid: aira-technologies:aira-technologies-oembed-api
+  name: Aira Technologies oEmbed API
+  description: >-
+    Public oEmbed 1.0 provider endpoint for aira-technology.com URLs, returning embeddable rich
+    metadata — title, author, thumbnail and iframe HTML — for any post, page, article or event.
+  humanURL: https://aira-technology.com/wp-json/
+  baseURL: https://aira-technology.com/wp-json
+  tags:
+  - oEmbed
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/aira-technologies-oembed-api-openapi.yml
+  - type: Authentication
+    url: authentication/aira-technologies-authentication.yml
+  - type: ErrorCatalog
+    url: errors/aira-technologies-problem-types.yml
+  - type: Conventions
+    url: conventions/aira-technologies-conventions.yml
+  - type: Conformance
+    url: conformance/aira-technologies-conformance.yml
+  - type: Overlay
+    url: overlays/aira-technologies-oembed-api-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +310,65 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://aira-technology.com/
+- type: About
+  url: https://aira-technology.com/about/
+- type: Products
+  url: https://aira-technology.com/naavik/
+- type: Blog
+  url: https://aira-technology.com/blogs-whitepapers/
+- type: BlogRSS
+  url: https://aira-technology.com/feed/
+- type: Press
+  url: https://aira-technology.com/news/
+- type: Events
+  url: https://aira-technology.com/events/
+- type: Partners
+  url: https://aira-technology.com/partners/
+- type: Leadership
+  url: https://aira-technology.com/leadership/
+- type: Investors
+  url: https://aira-technology.com/advisors-investors/
+- type: Contact
+  url: https://aira-technology.com/contact-us/
+- type: Careers
+  url: https://aira-technology.com/join-the-team/
+- type: PrivacyPolicy
+  url: https://aira-technology.com/privacy-policy/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/aira-technologies/
+- type: Authentication
+  url: authentication/aira-technologies-authentication.yml
+- type: ErrorCatalog
+  url: errors/aira-technologies-problem-types.yml
+- type: Conventions
+  url: conventions/aira-technologies-conventions.yml
+- type: DataModel
+  url: data-model/aira-technologies-data-model.yml
+- type: Conformance
+  url: conformance/aira-technologies-conformance.yml
+- type: Lifecycle
+  url: lifecycle/aira-technologies-lifecycle.yml
+- type: RateLimits
+  url: rate-limits/aira-technologies-rate-limits.yml
+- type: Plans
+  url: plans/aira-technologies-plans-pricing.yml
+- type: Packages
+  url: packages/aira-technologies-packages.yml
+- type: LLMsTxt
+  url: llms/aira-technologies-llms.txt
+- type: Examples
+  url: examples/aira-technologies-examples.yml
+- type: ToolCrosswalk
+  url: mcp/aira-technologies-tool-crosswalk.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/aira-technologies-agentic-access.yml
+- type: DomainSecurity
+  url: security/aira-technologies-domain-security.yml
+x-enrichment:
+  date: '2026-09-14'
+  status: enriched
+  artifacts_added: 37
+  pass: local-v3

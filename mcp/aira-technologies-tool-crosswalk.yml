@@ -1,0 +1,53 @@
+generated: '2026-09-14'
+method: derived
+source: mcp/aira-technologies-mcp.yml (candidate tools) + openapi/ (24 operations across 10 specs)
+description: >-
+  Binding between the CANDIDATE MCP tool list and the REST operations that back it. Aira
+  Technologies publishes neither an MCP server nor a GraphQL endpoint, so there is no live tool
+  schema to reconcile against — this crosswalk is a one-to-one derivation from the OpenAPI
+  documents in this repo, and every row is high confidence for exactly that reason: the tool IS
+  the operation. It is recorded so that the day Aira (or anyone) stands a server over this surface,
+  the divergence between tools and operations is measurable rather than invented.
+surfaces:
+  openapi: openapi/ (10 documents, 24 operations, derived from live HTTP OPTIONS schemas)
+  graphql: null
+  mcp: null
+  gated:
+  - surface: WordPress Abilities registry
+    url: https://aira-technology.com/wp-json/wp-abilities/v1/abilities
+    status: 401
+    note: The only agent-shaped registry on the host; auth-gated, contents unknown, not mapped.
+crosswalk:
+- {tool: list_posts, category: content, rest: [listPosts], binding: direct, confidence: high}
+- {tool: get_post, category: content, rest: [getPost], binding: direct, confidence: high}
+- {tool: list_articles, category: content, rest: [listArticles], binding: direct, confidence: high}
+- {tool: get_article, category: content, rest: [getArticle], binding: direct, confidence: high}
+- {tool: list_events, category: content, rest: [listEvents], binding: direct, confidence: high}
+- {tool: get_event, category: content, rest: [getEvent], binding: direct, confidence: high}
+- {tool: list_pages, category: content, rest: [listPages], binding: direct, confidence: high}
+- {tool: get_page, category: content, rest: [getPage], binding: direct, confidence: high}
+- {tool: list_media, category: media, rest: [listMedia], binding: direct, confidence: high}
+- {tool: get_media_item, category: media, rest: [getAttachment], binding: direct, confidence: high}
+- {tool: list_categories, category: taxonomy, rest: [listCategories], binding: direct, confidence: high}
+- {tool: get_category, category: taxonomy, rest: [getCategory], binding: direct, confidence: high}
+- {tool: list_authors, category: identity, rest: [listUsers], binding: direct, confidence: high}
+- {tool: get_author, category: identity, rest: [getUser], binding: direct, confidence: high}
+- {tool: search_content, category: search, rest: [searchContent], binding: direct, confidence: high}
+- {tool: get_api_root, category: discovery, rest: [getApiRoot], binding: direct, confidence: high}
+- {tool: list_types, category: discovery, rest: [listTypes], binding: direct, confidence: high}
+- {tool: list_taxonomies, category: discovery, rest: [listTaxonomies], binding: direct, confidence: high}
+- {tool: get_oembed, category: metadata, rest: [getOembed], binding: direct, confidence: high}
+mcp_only: []
+rest_only:
+- {operation: getNamespaceIndex, spec: openapi/aira-technologies-discovery-api-openapi.yml, reason: 'Namespace-scoped route index; redundant with get_api_root for a tool surface.'}
+- {operation: getType, spec: openapi/aira-technologies-discovery-api-openapi.yml, reason: 'Single content-type lookup; list_types already returns every type in one call.'}
+- {operation: getTaxonomy, spec: openapi/aira-technologies-discovery-api-openapi.yml, reason: 'Single taxonomy lookup; list_taxonomies returns all four.'}
+- {operation: listStatuses, spec: openapi/aira-technologies-discovery-api-openapi.yml, reason: 'Publication statuses; not useful to an anonymous reader who only ever sees `publish`.'}
+- {operation: getStatus, spec: openapi/aira-technologies-discovery-api-openapi.yml, reason: Same as listStatuses.}
+coverage:
+  mcp_tools: 19
+  rest_operations: 24
+  bound: 19
+  mcp_only: 0
+  rest_only: 5
+  unbound_pct: 0

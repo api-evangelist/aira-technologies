@@ -1,0 +1,27 @@
+generated: '2026-09-14'
+method: searched
+source: https://aira-technology.com/
+plan_count: 0
+note: >-
+  Aira Technologies publishes no pricing of any kind. There is no pricing page, no plans page, no
+  signup, no free tier and no self-serve checkout anywhere on aira-technology.com — /pricing/
+  returns 404, and the 19-page site sitemap contains no pricing, plans, signup or login entry.
+  Naavik and RANGPT are sold to mobile network operators through a demo and sales motion; every
+  call to action on the site is "Talk with us", "Book a Demo" or "Learn More". The content API
+  documented in this repo is incidental WordPress infrastructure that is free and unmetered
+  because nobody is selling it. plan_count is 0 as a recorded fact, not an unchecked field.
+plans: []
+commercial_model: contact-sales (enterprise, no published pricing)
+contact: https://aira-technology.com/contact-us/
+evidence:
+- url: https://aira-technology.com/pricing/
+  http_status: 404
+- url: https://aira-technology.com/wp-sitemap-posts-page-1.xml
+  http_status: 200
+  finding: 19 pages listed; none is a pricing, plans, signup, login or checkout page.
+- url: https://aira-technology.com/naavik/
+  http_status: 200
+  finding: Product page; every call to action is a contact/demo form, no price is stated.
+- url: https://aira-technology.com/demos/
+  http_status: 200
+  finding: 'Demos page renders a WordPress login form — "You must be logged in to view this page" — rather than content. The nearest thing to a gate on this site, and it is not a paywall.'

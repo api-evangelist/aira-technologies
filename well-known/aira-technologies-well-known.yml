@@ -1,0 +1,56 @@
+generated: '2026-09-14'
+method: probed
+source: live probes of /.well-known/* on every host this record knows
+hit_count: 0
+note: >-
+  Every /.well-known/ path probed on aira-technology.com returned a real 404 carrying the site's
+  HTML 404 page — not a soft 200 SPA shell — so these are honest absences and not a detection
+  failure. www.aira-technology.com 301-redirects to the apex for every path, so it is the same
+  surface, not a second one. aira-technology.com serves no RFC 8615 discovery surface of any kind.
+  NO WellKnown and NO SecurityTxt pointer is emitted in apis.yml, because a pointer would assert
+  the provider serves a surface it does not serve. There are only two hosts to probe: the website,
+  the API and the (absent) docs are all aira-technology.com, and every candidate developer
+  subdomain is NXDOMAIN.
+hosts:
+- host: aira-technology.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/openid-configuration, status: 404, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/oauth-authorization-server, status: 404, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/oauth-protected-resource, status: 404, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/api-catalog, status: 404, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/ai-plugin.json, status: 404, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/agent-card.json, status: 404, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/agent.json, status: 404, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/aauth-resource.json, status: 404, content_type: 'text/html; charset=UTF-8', file: null}
+- host: www.aira-technology.com
+  documents:
+  - {path: /.well-known/security.txt, status: 301, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/openid-configuration, status: 301, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/oauth-authorization-server, status: 301, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/oauth-protected-resource, status: 301, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/api-catalog, status: 301, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/ai-plugin.json, status: 301, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/agent-card.json, status: 301, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/agent.json, status: 301, content_type: 'text/html; charset=UTF-8', file: null}
+  - {path: /.well-known/aauth-resource.json, status: 301, content_type: 'text/html; charset=UTF-8', file: null}
+  note: Every path 301-redirects to the apex host, which 404s. Not an independent surface.
+related_probes:
+- {path: /llms.txt, status: 404, note: 'No provider-published llms.txt; a generated one is in llms/.'}
+- {path: /llms-full.txt, status: 404}
+- {path: /security.txt, status: 404, note: 'Legacy root location, also absent.'}
+- {path: /ai.txt, status: 404}
+- {path: /openapi.json, status: 404, note: 'Probed per STEP 0b against the only host that exists. The real machine-readable contract on this host is the WordPress OPTIONS schema surface, which is what openapi/ was derived from.'}
+- {path: /robots.txt, status: 200, note: 'WordPress default; disallows only /wp-admin/ (allowing admin-ajax.php) and points at wp-sitemap.xml. Nothing in this pass was blocked by robots.'}
+- {path: /sitemap.xml, status: 200, note: 'WordPress core sitemap index; 6 child sitemaps (posts, pages, events, article, categories, users).'}
+- {path: /wp-json/, status: 200, note: 'The one machine-readable discovery document this host serves — 206 routes across 21 namespaces. It is not an RFC 8615 well-known location, so it earns no WellKnown credit.'}
+subdomains_checked:
+- {host: api.aira-technology.com, dns: NXDOMAIN}
+- {host: docs.aira-technology.com, dns: NXDOMAIN}
+- {host: developer.aira-technology.com, dns: NXDOMAIN}
+- {host: developers.aira-technology.com, dns: NXDOMAIN}
+- {host: app.aira-technology.com, dns: NXDOMAIN}
+- {host: naavik.aira-technology.com, dns: NXDOMAIN}
+- {host: portal.aira-technology.com, dns: NXDOMAIN}
+- {host: status.aira-technology.com, dns: NXDOMAIN}
+- {host: trust.aira-technology.com, dns: NXDOMAIN}

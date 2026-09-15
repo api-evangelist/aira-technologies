@@ -1,0 +1,87 @@
+generated: '2026-09-14'
+method: probed
+source: live error responses from https://aira-technology.com/wp-json/ + openapi/ derived responses
+format: wp-rest-error
+rfc9457: false
+description: >-
+  Error catalog for the WordPress REST content API behind aira-technology.com. Aira Technologies
+  publishes no error reference, so every entry below was either observed live on 2026-09-14 or is
+  a WordPress core code the surface inherits and that the derived OpenAPI documents as a declared
+  response. Responses are NOT application/problem+json — the envelope is the WordPress REST shape.
+envelope:
+  media_type: application/json
+  shape: '{ "code": "<string>", "message": "<string>", "data": { "status": <int>, "params": {...}, "details": {...} } }'
+  match_on: code
+  note: >-
+    `message` is human-facing prose and is not stable across WordPress releases or locales. Match
+    on `code`, and read the HTTP status from `data.status` as well as the status line.
+error_count: 7
+errors:
+- code: rest_invalid_param
+  status: 400
+  title: Invalid parameter
+  detail: One or more query parameters failed validation. `data.params` names each failing parameter with its message and `data.details` repeats it with a nested code.
+  remediation: Read `data.params` and correct the named parameter. The most common cause on this surface is per_page above 100.
+  observed: true
+  evidence:
+    url: https://aira-technology.com/wp-json/wp/v2/posts?per_page=500
+    body: '{"code":"rest_invalid_param","message":"Invalid parameter(s): per_page","data":{"status":400,"params":{"per_page":"per_page must be between 1 (inclusive) and 100 (inclusive)"}}}'
+- code: rest_forbidden
+  status: 401
+  title: Not allowed
+  detail: The request targets a context, route or method that requires authentication. Returned anonymously for GET /wp/v2/settings and for the whole /wp-abilities/v1 namespace.
+  remediation: A WordPress application password is required. There is no public issuance path, so this is effectively a closed door for third parties.
+  observed: true
+  evidence:
+    url: https://aira-technology.com/wp-json/wp/v2/settings
+    body: '{"code":"rest_forbidden","message":"Sorry, you are not allowed to do that.","data":{"status":401}}'
+- code: rest_cannot_create
+  status: 401
+  title: Cannot create
+  detail: A write method was attempted without credentials. Note that the status is 401, not 403 or 405 — an unauthenticated POST to a collection is reported as an authorization failure rather than a method error.
+  remediation: Treat every route on this surface as read-only. Do not retry.
+  observed: true
+  evidence:
+    url: 'POST https://aira-technology.com/wp-json/wp/v2/posts'
+    body: '{"code":"rest_cannot_create","message":"Sorry, you are not allowed to create posts as this user.","data":{"status":401}}'
+- code: rest_post_invalid_id
+  status: 404
+  title: Invalid post ID
+  detail: The numeric id in the path does not resolve to a record of the requested type, or the record is not publicly viewable.
+  remediation: Resolve ids from a collection listing or from /wp/v2/search rather than guessing.
+  observed: true
+  evidence:
+    url: https://aira-technology.com/wp-json/wp/v2/posts/999999999
+    body: '{"code":"rest_post_invalid_id","message":"Invalid post ID.","data":{"status":404}}'
+- code: rest_no_route
+  status: 404
+  title: No route
+  detail: No registered route matches the URL and HTTP method. This is the response for a mistyped path or for a method the route does not register.
+  remediation: Re-read the route index at GET /wp-json/ — it is the authoritative list of the 206 routes this host registers.
+  observed: true
+  evidence:
+    url: https://aira-technology.com/wp-json/wp/v2/nonexistent
+    body: '{"code":"rest_no_route","message":"No route was found matching the URL and request method.","data":{"status":404}}'
+- code: rest_term_invalid
+  status: 404
+  title: Invalid term ID
+  detail: WordPress core code returned when a taxonomy term id (category) does not exist. Declared as a 404 response on the categories item route in the derived OpenAPI.
+  remediation: List /wp/v2/categories and use a returned id.
+  observed: false
+  note: Not triggered during this pass; inherited WordPress core behaviour, documented as a declared response rather than an observed one.
+- code: rest_user_invalid_id
+  status: 404
+  title: Invalid user ID
+  detail: WordPress core code returned when an author id does not exist or has no public posts. Declared as a 404 response on the users item route in the derived OpenAPI.
+  remediation: List /wp/v2/users and use a returned id.
+  observed: false
+  note: Not triggered during this pass; inherited WordPress core behaviour.
+not_returned:
+- header: Retry-After
+  note: No 429 was produced and no Retry-After header was observed. There is no published throttling contract.
+- field: type
+  note: No RFC 9457 `type` URI is emitted. There is no per-error documentation page to link to, because there is no documentation.
+evidence_summary:
+  probed: 5
+  observed_codes: 5
+  fetched: '2026-09-14'

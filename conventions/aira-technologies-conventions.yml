@@ -1,0 +1,143 @@
+generated: '2026-09-14'
+method: probed
+source: live responses from https://aira-technology.com/wp-json/ + openapi/ derived parameters
+description: >-
+  Cross-cutting request/response semantics for the WordPress REST content API behind
+  aira-technology.com. Aira Technologies publishes no API documentation, so every convention below
+  was read off live responses and the server's own HTTP OPTIONS schema documents on 2026-09-14, or
+  is the documented WordPress core behaviour the surface inherits.
+authentication:
+  style: none for reads
+  detail: >-
+    Anonymous read. No key, token or account. Writes require a WordPress application password
+    (Basic over TLS) that has no public issuance path.
+  artifact: authentication/aira-technologies-authentication.yml
+idempotency:
+  supported: false
+  coverage: na
+  scope: []
+  idempotency_key_header: null
+  detail: >-
+    There is no idempotency contract and there is no public mutating surface to apply one to. No
+    Idempotency-Key header, parameter or replay window is accepted or documented anywhere. Every
+    anonymously reachable operation is a GET — the collection routes answer `Allow: GET` without
+    credentials — so they are idempotent by HTTP method semantics alone, which is not the same
+    thing as an idempotency guarantee for retried writes. `coverage: na` rather than `none`
+    because the denominator is empty: an agent cannot double-fire a write it cannot make.
+reversibility:
+  applicable: false
+  grade: na
+  detail: >-
+    The public surface is read-only, so there is nothing to take back. No create, update, delete,
+    cancel, refund, void, reverse, undo, rollback or restore operation is reachable without a
+    WordPress application password, and no credential issuance path exists for the public. The
+    write methods that do exist on these routes are WordPress core CMS operations governed by
+    WordPress semantics, not by any policy Aira publishes; Aira states no reversal window for
+    anything, and none is asserted here.
+  write_surfaces: []
+dry_run_mode:
+  supported: false
+  detail: No dry-run, preview, validate-only or simulate parameter exists. Not applicable to a read-only surface.
+pagination:
+  style: page-number with offset alternative
+  params:
+    page: 1-based page number. Default 1.
+    per_page: Records per page. Default 10, minimum 1, maximum 100 — exceeding it returns 400 rest_invalid_param.
+    offset: Alternative to page; skip N records.
+    order: asc or desc.
+    orderby: Sort field; varies per resource (date, id, title, slug, relevance, ...).
+  response_headers:
+    X-WP-Total: Total records matching the query.
+    X-WP-TotalPages: Total pages available at the current per_page.
+    Link: RFC 8288 rel="next" / rel="prev" links.
+  detail: >-
+    Verified live: GET /wp/v2/posts?per_page=2 returned X-WP-Total 50, X-WP-TotalPages 25 and a
+    Link header carrying rel="next". Both counter headers are listed in
+    Access-Control-Expose-Headers, so they are readable from a browser.
+  cursor: false
+field_selection:
+  supported: true
+  params:
+    _fields: Comma-separated allowlist of top-level response fields — a real sparse-fieldset control.
+    _embed: Inline embeddable linked resources (author, featured media, terms) under _embedded.
+    _links: HAL-style link relations are present on every record by default.
+  detail: >-
+    Verified live on this host: GET /wp/v2/posts?per_page=5&_fields=id,date,slug,title,link,categories,author
+    returns a few hundred bytes where the unfiltered records run to tens of kilobytes.
+filtering:
+  detail: >-
+    Per-resource query parameters are declared in the OPTIONS document for each route and carried
+    into the derived OpenAPI. Common across post types: search, slug, include, exclude, after,
+    before, modified_after, modified_before, status, order, orderby.
+  taxonomy_filters:
+  - 'GET /wp/v2/posts?categories=<id>'
+  - 'GET /wp/v2/article?categories=<id>'
+  - 'GET /wp/v2/posts?tags=<id>  (registered, but the post_tag taxonomy holds 0 terms on this site)'
+context_parameter:
+  param: context
+  values: [view, embed, edit]
+  default: view
+  detail: >-
+    `view` is the full public record, `embed` a trimmed subset for embedding. `edit` requires
+    authentication and returns 401 anonymously. Field visibility per context is declared in each
+    property of the published schemas.
+request_tracing:
+  request_id_header: null
+  cdn_trace_header: cf-ray
+  detail: >-
+    No application correlation or request-id header is returned. Responses carry a Cloudflare
+    `cf-ray` edge identifier, which identifies the edge request, not the application request —
+    and there is no API support channel to quote it to.
+versioning:
+  scheme: uri-path namespace
+  current: wp/v2
+  detail: >-
+    The version is a namespace segment in the path. 21 namespaces are registered at capture
+    (wp/v2, oembed/1.0, wp-abilities/v1, breakdance/v1, simple-history/v1, meta-box/v1,
+    mb-relationships/v1, leadconnector_api/v1, wp-smush/v1, ...). Aira Technologies publishes no
+    versioning or deprecation policy of its own; the version moves when the site's WordPress core
+    and plugins are upgraded, with no announcement.
+  artifact: lifecycle/aira-technologies-lifecycle.yml
+error_envelope:
+  format: wp-rest-error
+  rfc9457: false
+  shape: '{code, message, data:{status, params?, details?}}'
+  detail: Match on `code`, never on `message`. Full catalog in errors/aira-technologies-problem-types.yml.
+  artifact: errors/aira-technologies-problem-types.yml
+rate_limiting:
+  documented: false
+  response_headers: []
+  detail: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header appeared on any observed response, and no
+    limits are published. An agent has no runtime signal here and must self-throttle. Cloudflare
+    sits in front of the origin, so any enforcement is silent and undeclared.
+  artifact: rate-limits/aira-technologies-rate-limits.yml
+caching:
+  observed_headers:
+    Cache-Control: 'public, max-age=0, s-maxage=2592000'
+    cf-cache-status: DYNAMIC
+  detail: >-
+    Observed on GET /wp/v2/posts. Browsers are told not to cache, while a shared/edge cache is
+    told to hold the response for 30 days. Freshness of any read is therefore an edge-cache
+    property, not a contract — a record updated on the site may be served stale for up to 30 days.
+  conditional_requests: not observed
+cors:
+  access_control_expose_headers: [X-WP-Total, X-WP-TotalPages, Link]
+  access_control_allow_headers: [Authorization, X-WP-Nonce, Content-Disposition, Content-MD5, Content-Type]
+indexing:
+  x_robots_tag: noindex
+  detail: >-
+    Every API response carries `X-Robots-Tag: noindex`. The data is public and machine-readable
+    but the provider signals it should not be indexed as content.
+content_type:
+  request: application/json
+  response: application/json; charset=UTF-8
+evidence:
+- url: https://aira-technology.com/wp-json/wp/v2/posts?per_page=2
+  http_status: 200
+  headers_observed: [x-wp-total, x-wp-totalpages, link, allow, cache-control, x-robots-tag, access-control-expose-headers, access-control-allow-headers, cf-ray, cf-cache-status, x-content-type-options]
+- url: https://aira-technology.com/wp-json/wp/v2/posts?per_page=500
+  http_status: 400
+  finding: 'rest_invalid_param — "per_page must be between 1 (inclusive) and 100 (inclusive)"'
+- url: https://aira-technology.com/wp-json/
+  http_status: 200

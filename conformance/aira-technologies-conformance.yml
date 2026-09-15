@@ -1,0 +1,120 @@
+generated: '2026-09-14'
+method: derived
+source: openapi/ derived from live HTTP OPTIONS documents + live response headers
+description: >-
+  Cross-cutting standards this surface does and does not conform to. Derived from the ten OpenAPI
+  documents in openapi/ and from live response headers, not from any claim by Aira Technologies —
+  the company publishes no conformance, compliance or certification statement anywhere on
+  aira-technology.com, and no trust center exists.
+conformance:
+- id: rest
+  name: REST over HTTP/JSON
+  conforms: true
+  evidence: >-
+    Resource-oriented paths, GET-only public surface, JSON request and response bodies, HTTP
+    status codes carrying semantics (200/400/401/404). Verified live at
+    https://aira-technology.com/wp-json/wp/v2/posts.
+- id: hal-style-links
+  name: Hypermedia link relations (_links / HAL-flavoured)
+  conforms: true
+  evidence: >-
+    Every record carries a `_links` object with `self`, `collection`, `about`, `author`,
+    `wp:attachment` and `curies` relations, and `_embed` inlines them under `_embedded`. Observed
+    on GET /wp/v2/posts. This is WordPress's own flavour, not strict HAL — the media type is
+    application/json, not application/hal+json.
+- id: rfc8288
+  name: 'RFC 8288 Web Linking (pagination)'
+  conforms: true
+  evidence: >-
+    'GET /wp/v2/posts?per_page=2 returned: Link: <https://aira-technology.com/wp-json/wp/v2/posts?per_page=2&page=2>; rel="next"'
+- id: oembed
+  name: oEmbed 1.0
+  conforms: true
+  evidence: >-
+    The site registers an oEmbed 1.0 provider endpoint at /wp-json/oembed/1.0/embed and returns a
+    conformant rich response (version "1.0", provider_name "Aira Technologies", provider_url,
+    type, html, thumbnail_*). Verified against https://aira-technology.com/naavik/.
+- id: json-schema
+  name: JSON Schema (draft-04 flavour, via OPTIONS)
+  conforms: true
+  evidence: >-
+    Each route answers HTTP OPTIONS with a `schema` document declaring $schema
+    http://json-schema.org/draft-04/schema#, typed properties and per-context field visibility.
+    This is the only machine-readable description Aira's host publishes, and it is what the
+    OpenAPI documents in openapi/ were derived from.
+- id: cors
+  name: CORS with exposed pagination headers
+  conforms: true
+  evidence: 'Access-Control-Expose-Headers: X-WP-Total, X-WP-TotalPages, Link — observed on GET /wp/v2/posts.'
+- id: rfc9457
+  name: 'RFC 9457 Problem Details for HTTP APIs'
+  conforms: false
+  evidence: >-
+    Errors return application/json with the WordPress `{code, message, data:{status}}` envelope,
+    not application/problem+json and not a `type` URI. See errors/aira-technologies-problem-types.yml.
+- id: oauth2
+  name: OAuth 2.0
+  conforms: false
+  evidence: >-
+    No oauth2 securityScheme in any derived spec, and /.well-known/oauth-authorization-server
+    returned 404. The only declared method is WordPress application passwords (HTTP Basic).
+- id: oidc
+  name: OpenID Connect
+  conforms: false
+  evidence: /.well-known/openid-configuration returned 404 on aira-technology.com.
+- id: idempotency
+  name: Idempotency-Key for retried writes
+  conforms: false
+  evidence: >-
+    No Idempotency-Key header or equivalent exists, and there is no public mutating surface. See
+    conventions/aira-technologies-conventions.yml (coverage: na).
+- id: pagination
+  name: Declared, discoverable pagination
+  conforms: true
+  evidence: >-
+    page / per_page / offset / order / orderby declared in every collection OPTIONS document, with
+    X-WP-Total and X-WP-TotalPages returned and exposed to browsers.
+- id: rfc8615
+  name: 'RFC 8615 .well-known discovery'
+  conforms: false
+  evidence: >-
+    All seven probed /.well-known/ paths returned 404 with the site's HTML 404 page. See
+    well-known/aira-technologies-well-known.yml.
+domain_standards:
+  note: >-
+    Aira Technologies sells into telecommunications, a market with real domain standards — O-RAN
+    (A1/E2/O1/R1 interfaces), 3GPP, and the TM Forum Open API suite. Aira's press material states
+    membership in the O-RAN Alliance, the AI-RAN Alliance and TM Forum, and describes RANGPT
+    communicating with an SMO over the R1 interface and with the RAN over O1. NONE of that is a
+    contract we can read. The domain-standard check reads the CONTRACT, not a prose claim, and
+    there is no Aira-published spec, schema, message type, URN or $metadata surface to inspect —
+    no TM Forum Open API resource shape, no O-RAN YANG model, no xApp descriptor. This slot is
+    therefore recorded as unevaluated rather than conformant or non-conformant. The check is
+    reward-only, so an unevaluated slot costs Aira nothing; it is recorded so a later pass knows
+    the lead was chased and why it stopped.
+  candidates_checked:
+  - standard: TM Forum Open API
+    contract_evidence: none
+    note: Membership and a 2026 TM Forum Catalyst award are claimed in press releases; no TMF6xx resource shape, schema or conformance profile is published by Aira.
+  - standard: 'O-RAN Alliance (A1 / E2 / O1 / R1)'
+    contract_evidence: none
+    note: Described in press releases about RANGPT and the channel-estimation xApp; no YANG model, xApp descriptor or interface spec is published by Aira.
+  - standard: 3GPP
+    contract_evidence: none
+compliance:
+  certifications_published: []
+  trust_center: null
+  note: >-
+    No SOC 2, ISO 27001, PCI, HIPAA, FedRAMP or other certification is claimed anywhere on
+    aira-technology.com, and trust.aira-technology.com is NXDOMAIN. probe-security-programs.py
+    returned vdp=none trust=none. No `Compliance` or `TrustCenter` pointer is emitted, because
+    there is nothing published to point at.
+evidence:
+- url: https://aira-technology.com/wp-json/wp/v2/posts?per_page=2
+  http_status: 200
+- url: https://aira-technology.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Faira-technology.com%2Fnaavik%2F
+  http_status: 200
+- url: https://aira-technology.com/.well-known/openid-configuration
+  http_status: 404
+- url: https://aira-technology.com/.well-known/oauth-authorization-server
+  http_status: 404
