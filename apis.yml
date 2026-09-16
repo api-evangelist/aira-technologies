@@ -28,6 +28,18 @@ tags:
 - Telecommunications
 - Wireless
 - Artificial Intelligence
+- Machine-Learning
+- 5G
+- Radio Access Network
+- Network Automation
+- Generative AI
+- Observability
+- Content
+tags_raw:
+- Company
+- Telecommunications
+- Wireless
+- Artificial Intelligence
 - Machine Learning
 - 5G
 - Radio Access Network
@@ -129,6 +141,9 @@ apis:
   humanURL: https://aira-technology.com/wp-json/
   baseURL: https://aira-technology.com/wp-json
   tags:
+  - Event
+  - Content
+  tags_raw:
   - Events
   - Content
   properties:
