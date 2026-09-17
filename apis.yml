@@ -51,8 +51,8 @@ apis:
 - aid: aira-technologies:aira-technologies-posts-api
   name: Aira Technologies Posts API
   description: >-
-    Public, unauthenticated read access to the Aira Technologies news, press-release and blog
-    archive via the WordPress core REST API. Verified live at 50 published posts.
+    Public, unauthenticated read access to the Aira Technologies news, press-release and blog archive
+    via the WordPress core REST API. Verified live at 50 published posts.
   humanURL: https://aira-technology.com/wp-json/
   baseURL: https://aira-technology.com/wp-json
   tags:
@@ -78,10 +78,9 @@ apis:
 - aid: aira-technologies:aira-technologies-pages-api
   name: Aira Technologies Pages API
   description: >-
-    Public, unauthenticated read access to the static marketing and policy pages of
-    aira-technology.com — Naavik, Vision, About, Leadership, Founding Team, Advisors & Investors,
-    Partners, Videos, Blogs & Whitepapers, Contact, Careers and Privacy Policy. Verified live at
-    19 published pages.
+    Public, unauthenticated read access to the static marketing and policy pages of aira-technology.com
+    — Naavik, Vision, About, Leadership, Founding Team, Advisors & Investors, Partners, Videos, Blogs
+    & Whitepapers, Contact, Careers and Privacy Policy. Verified live at 19 published pages.
   humanURL: https://aira-technology.com/wp-json/
   baseURL: https://aira-technology.com/wp-json
   tags:
@@ -107,9 +106,9 @@ apis:
 - aid: aira-technologies:aira-technologies-articles-api
   name: Aira Technologies Articles API
   description: >-
-    Public, unauthenticated read access to the `article` custom post type behind
-    aira-technology.com — long-form technical articles and whitepapers published separately from
-    the news archive. Verified live at 3 published articles.
+    Public, unauthenticated read access to the `article` custom post type behind aira-technology.com —
+    long-form technical articles and whitepapers published separately from the news archive. Verified
+    live at 3 published articles.
   humanURL: https://aira-technology.com/wp-json/
   baseURL: https://aira-technology.com/wp-json
   tags:
@@ -135,9 +134,9 @@ apis:
 - aid: aira-technologies:aira-technologies-events-api
   name: Aira Technologies Events API
   description: >-
-    Public, unauthenticated read access to the `events` custom post type behind
-    aira-technology.com — the Aira Activate conferences and the Role of AI/GenAI in Wireless
-    sessions. Verified live at 4 published events.
+    Public, unauthenticated read access to the `events` custom post type behind aira-technology.com —
+    the Aira Activate conferences and the Role of AI/GenAI in Wireless sessions. Verified live at 4 published
+    events.
   humanURL: https://aira-technology.com/wp-json/
   baseURL: https://aira-technology.com/wp-json
   tags:
@@ -166,9 +165,9 @@ apis:
 - aid: aira-technologies:aira-technologies-media-api
   name: Aira Technologies Media API
   description: >-
-    Public, unauthenticated read access to the media library behind aira-technology.com — platform
-    and product imagery, partner and press logos, event photography and document attachments with
-    their generated size variants. Verified live at 311 attachments.
+    Public, unauthenticated read access to the media library behind aira-technology.com — platform and
+    product imagery, partner and press logos, event photography and document attachments with their generated
+    size variants. Verified live at 311 attachments.
   humanURL: https://aira-technology.com/wp-json/
   baseURL: https://aira-technology.com/wp-json
   tags:
@@ -194,9 +193,9 @@ apis:
 - aid: aira-technologies:aira-technologies-search-api
   name: Aira Technologies Search API
   description: >-
-    Public, unauthenticated cross-content search over aira-technology.com — posts, pages, articles
-    and events — returning lightweight id / title / url / type / subtype records. Verified live: a
-    query for "naavik" returned 12 matching objects.
+    Public, unauthenticated cross-content search over aira-technology.com — posts, pages, articles and
+    events — returning lightweight id / title / url / type / subtype records. Verified live: a query for
+    "naavik" returned 12 matching objects.
   humanURL: https://aira-technology.com/wp-json/
   baseURL: https://aira-technology.com/wp-json
   tags:
@@ -220,10 +219,10 @@ apis:
 - aid: aira-technologies:aira-technologies-discovery-api
   name: Aira Technologies Discovery API
   description: >-
-    Public, unauthenticated discovery metadata for aira-technology.com — the self-describing route
-    index (206 routes across 21 namespaces at capture), the registered content types and
-    taxonomies, and the publication statuses. This is the surface that makes the rest of the API
-    machine-readable, because Aira Technologies publishes no API documentation of any kind.
+    Public, unauthenticated discovery metadata for aira-technology.com — the self-describing route index
+    (206 routes across 21 namespaces at capture), the registered content types and taxonomies, and the
+    publication statuses. This is the surface that makes the rest of the API machine-readable, because
+    Aira Technologies publishes no API documentation of any kind.
   humanURL: https://aira-technology.com/wp-json/
   baseURL: https://aira-technology.com/wp-json
   tags:
@@ -247,8 +246,8 @@ apis:
 - aid: aira-technologies:aira-technologies-categories-api
   name: Aira Technologies Categories API
   description: >-
-    Public, unauthenticated read access to the content categories applied across Aira Technologies
-    posts and articles. Verified live at 5 categories.
+    Public, unauthenticated read access to the content categories applied across Aira Technologies posts
+    and articles. Verified live at 5 categories.
   humanURL: https://aira-technology.com/wp-json/
   baseURL: https://aira-technology.com/wp-json
   tags:
@@ -272,8 +271,8 @@ apis:
 - aid: aira-technologies:aira-technologies-users-api
   name: Aira Technologies Users API
   description: >-
-    Public, unauthenticated read access to the public author records behind aira-technology.com —
-    the bylines attached to posts and articles. Verified live at 4 public authors.
+    Public, unauthenticated read access to the public author records behind aira-technology.com — the
+    bylines attached to posts and articles. Verified live at 4 public authors.
   humanURL: https://aira-technology.com/wp-json/
   baseURL: https://aira-technology.com/wp-json
   tags:
@@ -295,19 +294,16 @@ apis:
     url: conformance/aira-technologies-conformance.yml
   - type: Lifecycle
     url: lifecycle/aira-technologies-lifecycle.yml
-- aid: aira-technologies:aira-technologies-oembed-api
-  name: Aira Technologies oEmbed API
-  description: >-
-    Public oEmbed 1.0 provider endpoint for aira-technology.com URLs, returning embeddable rich
-    metadata — title, author, thumbnail and iframe HTML — for any post, page, article or event.
+- aid: aira-technologies:aira-technologies-o-embed-api
+  name: Aira Technologies o Embed API
+  description: oEmbed 1.0 provider endpoint.
   humanURL: https://aira-technology.com/wp-json/
   baseURL: https://aira-technology.com/wp-json
   tags:
-  - oEmbed
-  - Metadata
+  - o Embed
   properties:
   - type: OpenAPI
-    url: openapi/aira-technologies-oembed-api-openapi.yml
+    url: openapi/aira-technologies-o-embed-api-openapi.yml
   - type: Authentication
     url: authentication/aira-technologies-authentication.yml
   - type: ErrorCatalog
@@ -316,14 +312,14 @@ apis:
     url: conventions/aira-technologies-conventions.yml
   - type: Conformance
     url: conformance/aira-technologies-conformance.yml
-  - type: Overlay
-    url: overlays/aira-technologies-oembed-api-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/aira-technologies-oembed-api-overlay.yaml
 - type: Website
   url: https://aira-technology.com/
 - type: About
