@@ -300,6 +300,8 @@ apis:
   humanURL: https://aira-technology.com/wp-json/
   baseURL: https://aira-technology.com/wp-json
   tags:
+  - oEmbed
+  tags_raw:
   - o Embed
   properties:
   - type: OpenAPI
