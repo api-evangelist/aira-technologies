@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Aira Technologies Media API
   version: wp/v2
-  description: Public, unauthenticated read access to the media library behind aira-technology.com — product and
-    platform imagery, partner and press logos, event photography and document attachments, each with its generated
-    size variants. Verified live at 311 attachments.
+  description: Public, unauthenticated read access to the media library behind aira-technology.com — product and platform imagery, partner and press logos, event photography and document attachments, each with its generated size variants. Verified live at 311 attachments.
   contact:
     name: Aira Technologies
     url: https://aira-technology.com/contact-us/
   x-derived-from: https://aira-technology.com/wp-json/ route index + per-route HTTP OPTIONS schema documents
   x-derived-on: '2026-09-14'
-  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation;
-    this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter
-    and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
+  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation; this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
 servers:
 - url: https://aira-technology.com/wp-json
   description: Aira Technologies WordPress REST API
@@ -482,13 +478,10 @@ components:
           description: Attachment file size in bytes.
           type: integer
         exif_orientation:
-          description: EXIF orientation value. Values 1-8 follow the EXIF specification, where 1 means no rotation
-            needed.
+          description: EXIF orientation value. Values 1-8 follow the EXIF specification, where 1 means no rotation needed.
           type: integer
         image_quality:
-          description: Encode quality (1-100) from the wp_editor_set_quality filter, resolved against the output
-            MIME type. The "default" value applies to the full-size image; "sizes" lists per-registered-size overrides
-            where the filtered value differs from "default".
+          description: Encode quality (1-100) from the wp_editor_set_quality filter, resolved against the output MIME type. The "default" value applies to the full-size image; "sizes" lists per-registered-size overrides where the filtered value differs from "default".
           type: object
           properties:
             default:
@@ -519,8 +512,7 @@ components:
                 profile_300:
                   type: integer
         image_output_format:
-          description: The output MIME type this image should be converted to, based on the image_editor_output_format
-            filter. Null if no conversion is needed.
+          description: The output MIME type this image should be converted to, based on the image_editor_output_format filter. Null if no conversion is needed.
           type: string
         image_save_progressive:
           description: Whether to use progressive/interlaced encoding when saving this image.

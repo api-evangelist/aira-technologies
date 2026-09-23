@@ -2,18 +2,13 @@ openapi: 3.2.0
 info:
   title: Aira Technologies Discovery API
   version: wp/v2
-  description: Public, unauthenticated discovery metadata for aira-technology.com — the self-describing route index
-    (206 routes across 21 namespaces at capture), the registered content types and taxonomies, and the publication
-    statuses. This is the surface that makes the rest of the API machine-readable, because Aira Technologies publishes
-    no API documentation of any kind.
+  description: Public, unauthenticated discovery metadata for aira-technology.com — the self-describing route index (206 routes across 21 namespaces at capture), the registered content types and taxonomies, and the publication statuses. This is the surface that makes the rest of the API machine-readable, because Aira Technologies publishes no API documentation of any kind.
   contact:
     name: Aira Technologies
     url: https://aira-technology.com/contact-us/
   x-derived-from: https://aira-technology.com/wp-json/ route index + live GET responses
   x-derived-on: '2026-09-14'
-  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation;
-    this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter
-    and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
+  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation; this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
 servers:
 - url: https://aira-technology.com/wp-json
   description: Aira Technologies WordPress REST API
@@ -25,17 +20,13 @@ paths:
     get:
       operationId: getApiRoot
       summary: Get the API root document
-      description: 'Retrieve the self-describing root document for the site: site name, description, url, home,
-        the registered namespaces (21 at capture) and the full route index (206 routes at capture), plus the site''s
-        declared authentication method.'
+      description: 'Retrieve the self-describing root document for the site: site name, description, url, home, the registered namespaces (21 at capture) and the full route index (206 routes at capture), plus the site''s declared authentication method.'
       tags:
       - Discovery
       parameters: []
       responses:
         '200':
-          description: 'Retrieve the self-describing root document for the site: site name, description, url, home,
-            the registered namespaces (21 at capture) and the full route index (206 routes at capture), plus the
-            site''s declared authentication method.'
+          description: 'Retrieve the self-describing root document for the site: site name, description, url, home, the registered namespaces (21 at capture) and the full route index (206 routes at capture), plus the site''s declared authentication method.'
           content:
             application/json:
               schema:
@@ -97,15 +88,13 @@ paths:
     get:
       operationId: listTypes
       summary: List content types
-      description: Retrieve every registered content type on the site with its rest_base, supported taxonomies and
-        capability flags — including the site-specific `article` and `events` custom post types.
+      description: Retrieve every registered content type on the site with its rest_base, supported taxonomies and capability flags — including the site-specific `article` and `events` custom post types.
       tags:
       - Discovery
       parameters: []
       responses:
         '200':
-          description: Retrieve every registered content type on the site with its rest_base, supported taxonomies
-            and capability flags — including the site-specific `article` and `events` custom post types.
+          description: Retrieve every registered content type on the site with its rest_base, supported taxonomies and capability flags — including the site-specific `article` and `events` custom post types.
           content:
             application/json:
               schema:

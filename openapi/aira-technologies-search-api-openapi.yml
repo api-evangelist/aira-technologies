@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Aira Technologies Search API
   version: wp/v2
-  description: 'Public, unauthenticated cross-content search over aira-technology.com — posts, pages, articles and
-    events — returning lightweight id / title / url / type / subtype records. Verified live: a query for "naavik"
-    returned 12 matching objects.'
+  description: 'Public, unauthenticated cross-content search over aira-technology.com — posts, pages, articles and events — returning lightweight id / title / url / type / subtype records. Verified live: a query for "naavik" returned 12 matching objects.'
   contact:
     name: Aira Technologies
     url: https://aira-technology.com/contact-us/
   x-derived-from: https://aira-technology.com/wp-json/ route index + HTTP OPTIONS on /wp/v2/search
   x-derived-on: '2026-09-14'
-  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation;
-    this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter
-    and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
+  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation; this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
 servers:
 - url: https://aira-technology.com/wp-json
   description: Aira Technologies WordPress REST API
@@ -138,30 +134,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      description: WordPress REST error envelope. Match on `code`, never on `message`.
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code.
-        message:
-          type: string
-          description: Human-readable message; wording is not stable.
-        data:
-          type: object
-          description: Error detail.
-          properties:
-            status:
-              type: integer
-              description: HTTP status code.
-            params:
-              type: object
-              description: Per-parameter validation messages, when the error is a validation failure.
-      required:
-      - code
-      - message
-      - data
     SearchResult:
       title: search-result
       type: object
@@ -193,3 +165,27 @@ components:
           - article
           - category
           - post_tag
+    Error:
+      type: object
+      description: WordPress REST error envelope. Match on `code`, never on `message`.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+        message:
+          type: string
+          description: Human-readable message; wording is not stable.
+        data:
+          type: object
+          description: Error detail.
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+            params:
+              type: object
+              description: Per-parameter validation messages, when the error is a validation failure.
+      required:
+      - code
+      - message
+      - data

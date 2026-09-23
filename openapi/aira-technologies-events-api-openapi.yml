@@ -2,16 +2,13 @@ openapi: 3.2.0
 info:
   title: Aira Technologies Events API
   version: wp/v2
-  description: Public, unauthenticated read access to the `events` custom post type behind aira-technology.com —
-    the Aira Activate conferences and the Role of AI/GenAI in Wireless sessions. Verified live at 4 published events.
+  description: Public, unauthenticated read access to the `events` custom post type behind aira-technology.com — the Aira Activate conferences and the Role of AI/GenAI in Wireless sessions. Verified live at 4 published events.
   contact:
     name: Aira Technologies
     url: https://aira-technology.com/contact-us/
   x-derived-from: https://aira-technology.com/wp-json/ route index + per-route HTTP OPTIONS schema documents
   x-derived-on: '2026-09-14'
-  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation;
-    this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter
-    and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
+  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation; this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
 servers:
 - url: https://aira-technology.com/wp-json
   description: Aira Technologies WordPress REST API

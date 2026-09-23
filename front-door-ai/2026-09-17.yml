@@ -1,0 +1,31 @@
+# Front Door AI Index — aira-technologies — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: aira-technologies
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: aira-technology.com
+  final_host: aira-technology.com
+  ownership: own
+  owner: aira-technologies
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 20
+  host_score: 20
+  density: 28.9
+  words: 692
+  tiers:
+    agentic: 1
+    core: 19
+    model: 0
+  ambiguous: 23
+  top_terms:
+    AI: 17
+    agent: 10
+    intelligence: 9
+    automation: 4
+    AI agent: 1
+    gen ai: 1
+    machine learning: 1

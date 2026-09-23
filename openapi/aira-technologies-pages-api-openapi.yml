@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Aira Technologies Pages API
   version: wp/v2
-  description: Public, unauthenticated read access to the static marketing and policy pages of aira-technology.com
-    — Naavik, Vision, About, Leadership, Founding Team, Advisors & Investors, Partners, Videos, Demos, Blogs & Whitepapers,
-    Contact, Careers and Privacy Policy. Verified live at 19 published pages.
+  description: Public, unauthenticated read access to the static marketing and policy pages of aira-technology.com — Naavik, Vision, About, Leadership, Founding Team, Advisors & Investors, Partners, Videos, Demos, Blogs & Whitepapers, Contact, Careers and Privacy Policy. Verified live at 19 published pages.
   contact:
     name: Aira Technologies
     url: https://aira-technology.com/contact-us/
   x-derived-from: https://aira-technology.com/wp-json/ route index + per-route HTTP OPTIONS schema documents
   x-derived-on: '2026-09-14'
-  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation;
-    this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter
-    and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
+  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation; this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
 servers:
 - url: https://aira-technology.com/wp-json
   description: Aira Technologies WordPress REST API

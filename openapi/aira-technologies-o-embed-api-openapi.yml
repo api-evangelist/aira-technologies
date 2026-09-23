@@ -1,23 +1,19 @@
 openapi: 3.2.0
 info:
-  title: Aira Technologies oEmbed API
+  title: Aira Technologies o Embed API
   version: oembed/1.0
-  description: Public oEmbed 1.0 provider endpoint for aira-technology.com URLs, returning embeddable rich metadata
-    — title, author, thumbnail and iframe HTML — for any post, page, article or event on the site. Verified live
-    against https://aira-technology.com/naavik/.
+  description: Public oEmbed 1.0 provider endpoint for aira-technology.com URLs, returning embeddable rich metadata — title, author, thumbnail and iframe HTML — for any post, page, article or event on the site. Verified live against https://aira-technology.com/naavik/.
   contact:
     name: Aira Technologies
     url: https://aira-technology.com/contact-us/
   x-derived-from: https://aira-technology.com/wp-json/ route index + HTTP OPTIONS on /oembed/1.0/embed
   x-derived-on: '2026-09-14'
-  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation;
-    this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter
-    and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
+  x-api-evangelist-note: Third-party profile. Aira Technologies publishes no developer program or API documentation; this documents the anonymously readable WordPress REST content API behind aira-technology.com. Every path, parameter and schema here was read from the server's own HTTP OPTIONS documents on 2026-09-14 — nothing is invented.
 servers:
 - url: https://aira-technology.com/wp-json
   description: Aira Technologies WordPress REST API
 tags:
-- name: oEmbed
+- name: o Embed
   description: oEmbed 1.0 provider endpoint.
 paths:
   /oembed/1.0/embed:
@@ -26,7 +22,7 @@ paths:
       summary: Get oEmbed metadata for a URL
       description: Return oEmbed 1.0 rich metadata for any aira-technology.com URL.
       tags:
-      - oEmbed
+      - o Embed
       parameters:
       - name: format
         in: query
@@ -72,30 +68,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      description: WordPress REST error envelope. Match on `code`, never on `message`.
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code.
-        message:
-          type: string
-          description: Human-readable message; wording is not stable.
-        data:
-          type: object
-          description: Error detail.
-          properties:
-            status:
-              type: integer
-              description: HTTP status code.
-            params:
-              type: object
-              description: Per-parameter validation messages, when the error is a validation failure.
-      required:
-      - code
-      - message
-      - data
     OEmbedResponse:
       type: object
       description: oEmbed 1.0 rich response.
@@ -137,3 +109,27 @@ components:
           type: integer
         thumbnail_height:
           type: integer
+    Error:
+      type: object
+      description: WordPress REST error envelope. Match on `code`, never on `message`.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+        message:
+          type: string
+          description: Human-readable message; wording is not stable.
+        data:
+          type: object
+          description: Error detail.
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+            params:
+              type: object
+              description: Per-parameter validation messages, when the error is a validation failure.
+      required:
+      - code
+      - message
+      - data

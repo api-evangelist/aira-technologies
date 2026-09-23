@@ -1,0 +1,36 @@
+{
+  "provider": "aira-technologies",
+  "sources": [
+    "aira-technologies-articles-api-openapi.yml",
+    "aira-technologies-categories-api-openapi.yml",
+    "aira-technologies-discovery-api-openapi.yml",
+    "aira-technologies-events-api-openapi.yml",
+    "aira-technologies-media-api-openapi.yml",
+    "aira-technologies-o-embed-api-openapi.yml",
+    "aira-technologies-pages-api-openapi.yml",
+    "aira-technologies-posts-api-openapi.yml",
+    "aira-technologies-search-api-openapi.yml",
+    "aira-technologies-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "aira-technologies-articles-api-openapi.yml",
+    "aira-technologies-categories-api-openapi.yml",
+    "aira-technologies-discovery-api-openapi.yml",
+    "aira-technologies-events-api-openapi.yml",
+    "aira-technologies-media-api-openapi.yml",
+    "aira-technologies-o-embed-api-openapi.yml",
+    "aira-technologies-pages-api-openapi.yml",
+    "aira-technologies-posts-api-openapi.yml",
+    "aira-technologies-search-api-openapi.yml",
+    "aira-technologies-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [
+    "no openapi/_original/ archive: this run re-split PREVIOUSLY REFINED output, so any base URL it carries is inherited from an earlier pass rather than read from a document the provider published"
+  ],
+  "notes": [
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}
